@@ -1,0 +1,177 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T01:44:58.570Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 7,
+    "implemented": 7,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Implement a full auto-chess game loop: a preparation phase where the player buys and places Egyptian units on a hex/grid board, and a combat phase where units automatically battle enemy units. Include rounds, a shop system with random unit offerings, gold economy (earn gold per round, interest mechanic), player health points that decrease on losses, and a game-over condition.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useGameState.tsx",
+          "frontend/src/types/game.ts",
+          "frontend/src/components/Shop.tsx",
+          "frontend/src/components/Bench.tsx",
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/CombatAnimations.tsx",
+          "frontend/src/utils/combatEngine.ts",
+          "frontend/src/utils/goldEconomy.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useGameState.tsx",
+          "frontend/src/types/game.ts",
+          "frontend/src/components/Shop.tsx",
+          "frontend/src/components/Bench.tsx",
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/utils/combatEngine.ts",
+          "frontend/src/utils/goldEconomy.ts"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Create a roster of at least 8 distinct Egyptian-themed unit types: Pharaoh (legendary melee tank), Anubis Guard (melee fighter), Ra Priest (ranged magical attacker), Isis Sorceress (healer/support), Charioteer (fast ranged), Sphinx (area-damage caster), Horus Archer (ranged DPS), and Mummy Warrior (undead melee). Each unit has name, portrait icon, tier (1–3 star upgrade), attack, HP, ability description, and an Egyptian faction/synergy tag.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/data/units.ts",
+          "frontend/src/components/UnitCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/data/units.ts",
+          "frontend/src/components/UnitCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Implement a synergy/trait system with at least 4 Egyptian-themed synergies: 'Children of Ra' (Priests — bonus magic damage), 'Pharaoh's Guard' (Warriors — bonus armor), 'Desert Nomads' (Charioteers — bonus speed), 'Undead Legion' (Mummies — HP regeneration). Activating synergies at threshold counts (e.g., 2/4 units) grants passive buffs to all matching units.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/data/synergies.ts",
+          "frontend/src/components/SynergyPanel.tsx",
+          "frontend/src/utils/synergyCalculator.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/data/synergies.ts",
+          "frontend/src/components/SynergyPanel.tsx",
+          "frontend/src/utils/synergyCalculator.ts"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Build a 2D top-down battle board using an 8×4 hex or square grid. Animate units moving toward enemies and attacking during the combat phase. Show floating damage numbers, HP bars above units, and death animations (units fade/crumble). Use Egyptian-themed visual effects: golden glow for Ra abilities, sand particle bursts for desert units, hieroglyph flash for magical spells.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/GridTile.tsx",
+          "frontend/src/components/UnitSprite.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/GridTile.tsx",
+          "frontend/src/components/UnitSprite.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Design the entire UI with an ancient Egyptian aesthetic: sandy desert color palette (gold, sand beige, turquoise, dark ochre), hieroglyph-style decorative borders on panels, papyrus-textured card backgrounds, and Egyptian iconography (scarab, Eye of Horus, ankh, pyramid silhouettes) used as decorative elements throughout the interface. Use a serif or hieroglyph-inspired font for headings.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/EgyptianPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/EgyptianPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Create a main menu screen with the game title 'Pharaoh's Conquest', a Start Game button, and a How to Play modal explaining the auto-chess rules. Include a round tracker HUD showing current round number, player HP, current gold, and the active synergies panel during gameplay.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/MainMenu.tsx",
+          "frontend/src/components/HowToPlayModal.tsx",
+          "frontend/src/components/GameHUD.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/HowToPlayModal.tsx",
+          "frontend/src/components/GameHUD.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Render the generated Egyptian-themed images as static assets and integrate them into the UI: use the desert background on the main menu and battle board, the Egyptian panel border frame on all game panels, and unit portrait icons on unit cards and the shop.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/MainMenu.tsx",
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/EgyptianPanel.tsx",
+          "frontend/src/data/units.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/EgyptianPanel.tsx",
+          "frontend/src/data/units.ts"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/frontend/canister.yaml",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/egypt-battle-board.dim_1200x600.png",
+    "frontend/public/assets/generated/egypt-menu-bg.dim_1920x1080.png",
+    "frontend/public/assets/generated/egypt-panel-frame.dim_800x600.png",
+    "frontend/public/assets/generated/unit-anubis-guard.dim_256x256.png",
+    "frontend/public/assets/generated/unit-charioteer.dim_256x256.png",
+    "frontend/public/assets/generated/unit-horus-archer.dim_256x256.png",
+    "frontend/public/assets/generated/unit-isis-sorceress.dim_256x256.png",
+    "frontend/public/assets/generated/unit-mummy-warrior.dim_256x256.png",
+    "frontend/public/assets/generated/unit-pharaoh.dim_256x256.png",
+    "frontend/public/assets/generated/unit-ra-priest.dim_256x256.png",
+    "frontend/public/assets/generated/unit-sphinx.dim_256x256.png",
+    "frontend/src/components/BattleBoard.tsx",
+    "frontend/src/components/Bench.tsx",
+    "frontend/src/components/EgyptianPanel.tsx",
+    "frontend/src/components/GameHUD.tsx",
+    "frontend/src/components/GridTile.tsx",
+    "frontend/src/components/HowToPlayModal.tsx",
+    "frontend/src/components/Shop.tsx",
+    "frontend/src/components/SynergyPanel.tsx",
+    "frontend/src/components/UnitCard.tsx",
+    "frontend/src/components/UnitSprite.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/data/synergies.ts",
+    "frontend/src/data/units.ts",
+    "frontend/src/hooks/useGameState.tsx",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/types/game.ts",
+    "frontend/src/utils/combatEngine.ts",
+    "frontend/src/utils/goldEconomy.ts",
+    "frontend/src/utils/synergyCalculator.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

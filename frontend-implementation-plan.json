@@ -1,0 +1,228 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Pharaoh's Conquest - Ancient Egyptian Auto-Chess Game",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement complete auto-chess game loop with preparation and combat phases, shop system, gold economy, health tracking, and win/loss conditions",
+      "acceptanceCriteria": [
+        "Player can see a shop with 3–5 random Egyptian units to purchase each round",
+        "Player can drag units from bench to the battle board grid",
+        "After preparation time ends, combat phase starts automatically",
+        "Units attack enemy units autonomously during combat",
+        "Player loses HP when their army is defeated; game ends at 0 HP",
+        "Gold system: player earns gold each round and can spend it on units"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useGameState.tsx",
+          "operation": "create",
+          "description": "Create the core game state management hook with React state for game phase (preparation/combat), player HP, gold, round counter, bench units, board units, shop offerings, and enemy units. Include game loop logic: timer for preparation phase, transition to combat, combat resolution logic with unit AI targeting and damage calculation, round advancement, shop refresh, gold income with interest mechanic, and game-over detection when HP reaches 0."
+        },
+        {
+          "path": "frontend/src/types/game.ts",
+          "operation": "create",
+          "description": "Define TypeScript types and interfaces for the game: Unit (id, name, tier, hp, maxHp, attack, position, faction, abilityDescription, portraitImage), GamePhase enum (Preparation, Combat, GameOver), GameState (phase, round, playerHp, gold, bench, board, shop, enemyUnits), Position (x, y), and Synergy types."
+        },
+        {
+          "path": "frontend/src/components/Shop.tsx",
+          "operation": "create",
+          "description": "Create the shop component displaying 3–5 randomly selected Egyptian unit cards with purchase buttons. Show unit name, tier stars, cost, and portrait. Handle purchase logic: deduct gold, add unit to bench if space available. Use papyrus-textured card backgrounds and Egyptian border styling. Wire generated unit portrait images from frontend/public/assets/generated/unit-*.dim_256x256.png."
+        },
+        {
+          "path": "frontend/src/components/Bench.tsx",
+          "operation": "create",
+          "description": "Create the bench component displaying player's purchased units not yet placed on the board. Support drag-and-drop to move units from bench to board. Show unit portraits, HP bars, tier stars. Use Egyptian panel styling with hieroglyph borders."
+        },
+        {
+          "path": "frontend/src/components/BattleBoard.tsx",
+          "operation": "create",
+          "description": "Create the 2D battle board component rendering an 8×4 grid (hex or square tiles). Display friendly units on bottom half, enemy units on top half. Support drag-and-drop from bench to place units. During combat phase, animate unit movement toward targets, show floating damage numbers, update HP bars in real time, and play death animations (fade/crumble). Use the generated battle board background image frontend/public/assets/generated/egypt-battle-board.dim_1200x600.png."
+        },
+        {
+          "path": "frontend/src/components/CombatAnimations.tsx",
+          "operation": "create",
+          "description": "Create combat animation helper component and utilities for unit movement interpolation, attack animations, floating damage number rendering, HP bar updates, and death animations. Include Egyptian-themed visual effects: golden glow for Ra abilities, sand particle bursts for desert units, hieroglyph flash effects for magical spells using CSS animations or canvas rendering."
+        },
+        {
+          "path": "frontend/src/utils/combatEngine.ts",
+          "operation": "create",
+          "description": "Create combat engine utility functions for autonomous unit AI: target selection logic (nearest enemy, lowest HP, etc.), attack execution with damage calculation, HP updates, death detection, and combat phase completion detection (all units on one side defeated). Return combat events for animation rendering."
+        },
+        {
+          "path": "frontend/src/utils/goldEconomy.ts",
+          "operation": "create",
+          "description": "Create gold economy utility functions: calculate base gold per round, compute interest on saved gold (e.g., 1 gold per 10 saved, capped at 5 interest), apply win/loss streaks if desired, and handle unit sale refunds."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Define roster of 8 distinct Egyptian-themed unit types with stats, abilities, tiers, and faction synergy tags",
+      "acceptanceCriteria": [
+        "At least 8 unit types are selectable from the shop",
+        "Each unit displays name, tier stars, HP bar, and attack stat",
+        "Units have unique ability descriptions shown on hover/click",
+        "Synergy tags (e.g., 'Priest', 'Warrior', 'Royal') are visible on unit cards"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/units.ts",
+          "operation": "create",
+          "description": "Define a unit data registry with at least 8 Egyptian unit types: Pharaoh (legendary melee tank, faction: Royal), Anubis Guard (melee fighter, faction: Warrior), Ra Priest (ranged magical attacker, faction: Priest), Isis Sorceress (healer/support, faction: Priest), Charioteer (fast ranged, faction: Nomad), Sphinx (area-damage caster, faction: Mystic), Horus Archer (ranged DPS, faction: Warrior), Mummy Warrior (undead melee, faction: Undead). Each entry includes name, tier (1–3), base attack, base HP, abilityDescription, faction tags, and portraitImage path referencing the corresponding generated image frontend/public/assets/generated/unit-*.dim_256x256.png (unit-pharaoh, unit-anubis-guard, unit-ra-priest, unit-isis-sorceress, unit-charioteer, unit-sphinx, unit-horus-archer, unit-mummy-warrior)."
+        },
+        {
+          "path": "frontend/src/components/UnitCard.tsx",
+          "operation": "create",
+          "description": "Create reusable unit card component displaying unit portrait from the generated image, name, tier stars (1–3), HP bar, attack stat, and faction synergy tags. On hover or click, show a tooltip or modal with the full ability description. Use papyrus-textured background and Egyptian decorative border styling from frontend/public/assets/generated/egypt-panel-frame.dim_800x600.png."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement synergy/trait system with 4 Egyptian-themed synergies that activate at threshold counts and grant passive buffs",
+      "acceptanceCriteria": [
+        "Synergy panel shows all active synergies and their activation status",
+        "Placing the required number of synergy units activates the corresponding buff",
+        "Active synergy buffs are visually highlighted in the synergy panel"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/synergies.ts",
+          "operation": "create",
+          "description": "Define synergy data with at least 4 Egyptian-themed synergies: 'Children of Ra' (Priest faction, thresholds [2, 4], bonus: increased magic damage), 'Pharaoh's Guard' (Warrior faction, thresholds [2, 4], bonus: increased armor), 'Desert Nomads' (Nomad faction, thresholds [2, 3], bonus: increased attack speed), 'Undead Legion' (Undead faction, thresholds [2, 4], bonus: HP regeneration). Each synergy includes name, description, faction, thresholds, and buff effects."
+        },
+        {
+          "path": "frontend/src/components/SynergyPanel.tsx",
+          "operation": "create",
+          "description": "Create synergy panel component that displays all defined synergies, their activation thresholds, and current activation status based on the player's board units. Highlight active synergies with golden glow or turquoise accents. Use Egyptian iconography (scarab, ankh, Eye of Horus) as synergy icons and apply hieroglyph-style borders."
+        },
+        {
+          "path": "frontend/src/utils/synergyCalculator.ts",
+          "operation": "create",
+          "description": "Create synergy calculation utility that counts faction occurrences on the player's board, determines which synergies are active at which thresholds, and returns the active buffs. These buffs are applied to unit stats during combat."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build 2D top-down battle board with 8×4 grid, animate unit movement and attacks, show floating damage numbers, HP bars, and death animations with Egyptian-themed visual effects",
+      "acceptanceCriteria": [
+        "Battle board renders as a grid with distinct friendly and enemy halves",
+        "Units visually move toward their targets during combat",
+        "HP bars update in real time during combat",
+        "Floating damage numbers appear on hit",
+        "Units have a death animation when HP reaches 0"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BattleBoard.tsx",
+          "operation": "modify",
+          "description": "Enhance the battle board to render the 8×4 grid with distinct friendly (bottom 4 rows) and enemy (top 4 rows) halves. During combat phase, subscribe to combat events from the combat engine and trigger unit movement animations (CSS transitions or requestAnimationFrame), attack animations (flash or glow on attacker), floating damage numbers (absolute-positioned divs that fade and float upward), and HP bar updates. When a unit's HP reaches 0, play a death animation (opacity fade to 0 with a crumble/sand-burst effect using CSS or canvas particles)."
+        },
+        {
+          "path": "frontend/src/components/GridTile.tsx",
+          "operation": "create",
+          "description": "Create individual grid tile component with drop-zone support for unit placement. Style tiles with sandy stone texture and hieroglyph markings using the generated egypt-battle-board.dim_1200x600.png as a background or tile overlay."
+        },
+        {
+          "path": "frontend/src/components/UnitSprite.tsx",
+          "operation": "create",
+          "description": "Create unit sprite component that renders a unit on the board with its portrait image, HP bar above, and optional attack/ability visual effects. Support position prop (x, y) and animate position changes during combat. Include golden glow effect for Ra units, sand particle burst for desert units (Charioteer, Nomad), and hieroglyph flash for magical spells (Sphinx, Isis)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Design entire UI with ancient Egyptian aesthetic: sandy color palette, hieroglyph borders, papyrus textures, Egyptian iconography, and serif fonts",
+      "acceptanceCriteria": [
+        "Color palette is consistently gold, sand, turquoise, and ochre throughout the app",
+        "Panel borders and headers feature Egyptian-style decorative motifs",
+        "Unit cards use a papyrus-like textured background style",
+        "At least one Egyptian symbol (scarab, ankh, Eye of Horus) appears in the UI chrome"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global CSS to define an Egyptian-themed color palette using CSS custom properties: --egyptian-gold (#D4AF37), --sand-beige (#E4C087), --turquoise (#40E0D0), --dark-ochre (#6B4423), and --papyrus-tan (#F5E6D3). Add font imports for a serif or decorative font suitable for Egyptian hieroglyph-inspired headings (e.g., Cinzel, Trajan Pro, or a Google Font). Apply background patterns and textures for papyrus effect using CSS gradients or data URIs."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend the Tailwind theme to include Egyptian color tokens (egyptianGold, sandBeige, turquoise, darkOchre, papyrusTan), custom border styles for hieroglyph borders, and font family for decorative headings. Add utilities for Egyptian-themed shadows, glows, and decorative accents."
+        },
+        {
+          "path": "frontend/src/components/EgyptianPanel.tsx",
+          "operation": "create",
+          "description": "Create a reusable Egyptian-themed panel wrapper component that applies papyrus-textured backgrounds, hieroglyph-style borders using the generated egypt-panel-frame.dim_800x600.png image, and decorative corner elements (scarab, ankh, Eye of Horus icons). Use this component to wrap all major UI panels: shop, bench, synergy panel, HUD."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create main menu with game title, Start Game button, How to Play modal, and in-game HUD showing round, HP, gold, and synergies",
+      "acceptanceCriteria": [
+        "Main menu displays game title and Start Game button",
+        "How to Play modal opens and explains preparation/combat phases and synergies",
+        "In-game HUD shows round number, player HP, and current gold at all times",
+        "Active synergies panel is visible during gameplay"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/MainMenu.tsx",
+          "operation": "create",
+          "description": "Create main menu screen component displaying the game title 'Pharaoh's Conquest' in a large decorative Egyptian serif font, a Start Game button styled with golden accents and hieroglyph borders, and a How to Play button that opens the instructions modal. Use the generated desert panorama background image frontend/public/assets/generated/egypt-menu-bg.dim_1920x1080.png as the full-screen background."
+        },
+        {
+          "path": "frontend/src/components/HowToPlayModal.tsx",
+          "operation": "create",
+          "description": "Create a modal component explaining the auto-chess game rules: preparation phase (buy and place units), combat phase (units auto-battle), synergies (activate buffs by placing multiple units of the same faction), gold economy (earn gold per round, interest on saved gold), and win/loss conditions (defeat enemies to win rounds, lose HP on defeat, game over at 0 HP). Style the modal with Egyptian panel aesthetics using the egypt-panel-frame.dim_800x600.png border."
+        },
+        {
+          "path": "frontend/src/components/GameHUD.tsx",
+          "operation": "create",
+          "description": "Create the in-game HUD component displaying round number, player HP (with an HP bar or heart icons), current gold (with a coin icon), and a compact active synergies indicator. Position the HUD at the top of the screen during gameplay. Use Egyptian iconography (ankh for HP, gold coin icon) and apply hieroglyph-style panel borders."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Replace the existing Quiz app structure with a game view manager that renders MainMenu when the game is not started, and the full game interface (BattleBoard, Shop, Bench, GameHUD, SynergyPanel) during gameplay. Wrap the game in useGameState hook to provide game state context. Remove references to Header, Footer, and Quiz components."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Integrate generated Egyptian-themed images as static assets: desert backgrounds, panel borders, and unit portraits",
+      "acceptanceCriteria": [
+        "Main menu background uses the desert panorama image",
+        "Battle board background uses the desert battle scene image",
+        "Unit card portraits use the corresponding Egyptian unit portrait images",
+        "Panel frames use the decorative Egyptian border image"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/MainMenu.tsx",
+          "operation": "modify",
+          "description": "Set the main menu background to use the generated image frontend/public/assets/generated/egypt-menu-bg.dim_1920x1080.png as a full-screen background image via inline styles or CSS background-image property."
+        },
+        {
+          "path": "frontend/src/components/BattleBoard.tsx",
+          "operation": "modify",
+          "description": "Set the battle board background to use the generated image frontend/public/assets/generated/egypt-battle-board.dim_1200x600.png as the grid background, either as a CSS background-image or as an img element positioned behind the grid tiles."
+        },
+        {
+          "path": "frontend/src/components/EgyptianPanel.tsx",
+          "operation": "modify",
+          "description": "Apply the generated panel border image frontend/public/assets/generated/egypt-panel-frame.dim_800x600.png as a border-image or background overlay on all panel wrappers to create decorative Egyptian borders around game panels."
+        },
+        {
+          "path": "frontend/src/data/units.ts",
+          "operation": "modify",
+          "description": "Ensure each unit definition references the correct generated portrait image path: frontend/public/assets/generated/unit-pharaoh.dim_256x256.png for Pharaoh, frontend/public/assets/generated/unit-anubis-guard.dim_256x256.png for Anubis Guard, frontend/public/assets/generated/unit-ra-priest.dim_256x256.png for Ra Priest, frontend/public/assets/generated/unit-isis-sorceress.dim_256x256.png for Isis Sorceress, frontend/public/assets/generated/unit-charioteer.dim_256x256.png for Charioteer, frontend/public/assets/generated/unit-sphinx.dim_256x256.png for Sphinx, frontend/public/assets/generated/unit-horus-archer.dim_256x256.png for Horus Archer, and frontend/public/assets/generated/unit-mummy-warrior.dim_256x256.png for Mummy Warrior. These paths are used in UnitCard and UnitSprite components."
+        }
+      ]
+    }
+  ]
+}

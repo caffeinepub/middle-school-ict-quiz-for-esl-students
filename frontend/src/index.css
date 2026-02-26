@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+
+        /* Egyptian color palette */
+        --background: 0.18 0.04 55;
+        --foreground: 0.95 0.05 80;
+        --card: 0.22 0.05 50;
+        --card-foreground: 0.95 0.05 80;
+        --popover: 0.20 0.04 50;
+        --popover-foreground: 0.95 0.05 80;
+        --primary: 0.78 0.15 85;
+        --primary-foreground: 0.15 0.04 55;
+        --secondary: 0.30 0.06 50;
+        --secondary-foreground: 0.90 0.05 80;
+        --muted: 0.25 0.04 50;
+        --muted-foreground: 0.65 0.05 70;
+        --accent: 0.72 0.14 195;
+        --accent-foreground: 0.15 0.04 55;
+        --destructive: 0.55 0.22 27;
+        --destructive-foreground: 0.99 0 0;
+        --border: 0.35 0.08 60;
+        --input: 0.28 0.05 50;
+        --ring: 0.78 0.15 85;
+        --chart-1: 0.78 0.15 85;
+        --chart-2: 0.72 0.14 195;
+        --chart-3: 0.65 0.18 30;
+        --chart-4: 0.60 0.16 140;
+        --chart-5: 0.70 0.15 60;
+        --sidebar: 0.20 0.04 50;
+        --sidebar-foreground: 0.95 0.05 80;
+        --sidebar-primary: 0.78 0.15 85;
+        --sidebar-primary-foreground: 0.15 0.04 55;
+        --sidebar-accent: 0.28 0.05 50;
+        --sidebar-accent-foreground: 0.90 0.05 80;
+        --sidebar-border: 0.35 0.08 60;
+        --sidebar-ring: 0.78 0.15 85;
+
+        /* Egyptian custom tokens */
+        --egyptian-gold: oklch(0.78 0.15 85);
+        --egyptian-gold-bright: oklch(0.88 0.18 88);
+        --sand-beige: oklch(0.85 0.08 80);
+        --turquoise: oklch(0.72 0.14 195);
+        --dark-ochre: oklch(0.40 0.10 55);
+        --papyrus-tan: oklch(0.88 0.06 80);
+        --deep-lapis: oklch(0.30 0.12 250);
+        --blood-red: oklch(0.50 0.20 27);
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Crimson Text', Georgia, serif;
+    }
+
+    h1, h2, h3 {
+        font-family: 'Cinzel', serif;
+    }
+}
+
+@layer utilities {
+    .font-cinzel {
+        font-family: 'Cinzel', serif;
+    }
+    .font-cinzel-decorative {
+        font-family: 'Cinzel Decorative', serif;
+    }
+    .font-crimson {
+        font-family: 'Crimson Text', Georgia, serif;
+    }
+
+    .text-gold {
+        color: var(--egyptian-gold);
+    }
+    .text-turquoise {
+        color: var(--turquoise);
+    }
+    .bg-papyrus {
+        background-color: var(--papyrus-tan);
+    }
+
+    .egyptian-border {
+        border: 2px solid var(--egyptian-gold);
+        box-shadow: 0 0 8px oklch(0.78 0.15 85 / 0.4), inset 0 0 8px oklch(0.78 0.15 85 / 0.1);
+    }
+
+    .egyptian-glow {
+        box-shadow: 0 0 16px oklch(0.78 0.15 85 / 0.6), 0 0 32px oklch(0.78 0.15 85 / 0.3);
+    }
+
+    .turquoise-glow {
+        box-shadow: 0 0 12px oklch(0.72 0.14 195 / 0.6), 0 0 24px oklch(0.72 0.14 195 / 0.3);
+    }
+
+    .papyrus-bg {
+        background: linear-gradient(
+            135deg,
+            oklch(0.25 0.06 55) 0%,
+            oklch(0.22 0.05 50) 50%,
+            oklch(0.24 0.06 58) 100%
+        );
+    }
+
+    .sand-gradient {
+        background: linear-gradient(
+            180deg,
+            oklch(0.20 0.05 55) 0%,
+            oklch(0.16 0.04 50) 100%
+        );
+    }
+}
+
+@layer components {
+    .btn-egyptian {
+        @apply font-cinzel font-semibold tracking-wider;
+        background: linear-gradient(135deg, oklch(0.72 0.14 85), oklch(0.82 0.18 88));
+        color: oklch(0.15 0.04 55);
+        border: 1px solid oklch(0.88 0.18 88);
+        box-shadow: 0 2px 8px oklch(0.78 0.15 85 / 0.4);
+        transition: all 0.2s ease;
+    }
+    .btn-egyptian:hover {
+        background: linear-gradient(135deg, oklch(0.82 0.18 88), oklch(0.90 0.20 90));
+        box-shadow: 0 4px 16px oklch(0.78 0.15 85 / 0.6);
+        transform: translateY(-1px);
+    }
+    .btn-egyptian:disabled {
+        opacity: 0.5;
+        transform: none;
+        cursor: not-allowed;
+    }
+
+    .unit-card {
+        background: linear-gradient(
+            160deg,
+            oklch(0.28 0.07 55) 0%,
+            oklch(0.22 0.05 50) 60%,
+            oklch(0.26 0.06 58) 100%
+        );
+        border: 1px solid oklch(0.50 0.10 70);
+        transition: all 0.2s ease;
+    }
+    .unit-card:hover {
+        border-color: oklch(0.78 0.15 85);
+        box-shadow: 0 0 12px oklch(0.78 0.15 85 / 0.4);
+        transform: translateY(-2px);
+    }
+
+    .hp-bar-bg {
+        background: oklch(0.20 0.04 27);
+        border: 1px solid oklch(0.35 0.08 27);
+    }
+    .hp-bar-fill {
+        background: linear-gradient(90deg, oklch(0.55 0.20 140), oklch(0.65 0.22 145));
+        transition: width 0.3s ease;
+    }
+    .hp-bar-fill.low {
+        background: linear-gradient(90deg, oklch(0.55 0.22 27), oklch(0.65 0.24 30));
+    }
+}
+
+/* Floating damage number animation */
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    50% { opacity: 1; transform: translateY(-20px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
+}
+
+/* Death animation */
+@keyframes unitDeath {
+    0% { opacity: 1; transform: scale(1); filter: brightness(1); }
+    30% { opacity: 0.8; transform: scale(1.1); filter: brightness(2) sepia(1); }
+    100% { opacity: 0; transform: scale(0.3) rotate(15deg); filter: brightness(0.5) sepia(1); }
+}
+
+/* Attack flash animation */
+@keyframes attackFlash {
+    0% { filter: brightness(1); }
+    25% { filter: brightness(2.5) saturate(2); }
+    50% { filter: brightness(1); }
+    75% { filter: brightness(2) saturate(1.5); }
+    100% { filter: brightness(1); }
+}
+
+/* Pulse glow for active synergies */
+@keyframes pulseGold {
+    0%, 100% { box-shadow: 0 0 8px oklch(0.78 0.15 85 / 0.4); }
+    50% { box-shadow: 0 0 20px oklch(0.78 0.15 85 / 0.8), 0 0 40px oklch(0.78 0.15 85 / 0.4); }
+}
+
+/* Shimmer for gold elements */
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+/* Combat phase pulse */
+@keyframes combatPulse {
+    0%, 100% { border-color: oklch(0.65 0.22 27 / 0.6); }
+    50% { border-color: oklch(0.65 0.22 27 / 1); box-shadow: 0 0 20px oklch(0.65 0.22 27 / 0.5); }
+}
+
+/* Prep phase pulse */
+@keyframes prepPulse {
+    0%, 100% { border-color: oklch(0.78 0.15 85 / 0.6); }
+    50% { border-color: oklch(0.78 0.15 85 / 1); box-shadow: 0 0 20px oklch(0.78 0.15 85 / 0.5); }
+}
+
+.animate-float-up {
+    animation: floatUp 1.2s ease-out forwards;
+}
+.animate-death {
+    animation: unitDeath 0.8s ease-out forwards;
+}
+.animate-attack {
+    animation: attackFlash 0.4s ease-out;
+}
+.animate-pulse-gold {
+    animation: pulseGold 2s ease-in-out infinite;
+}
+.animate-combat-pulse {
+    animation: combatPulse 1s ease-in-out infinite;
+}
+.animate-prep-pulse {
+    animation: prepPulse 2s ease-in-out infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: oklch(0.18 0.04 55);
+}
+::-webkit-scrollbar-thumb {
+    background: oklch(0.50 0.10 70);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.78 0.15 85);
+}

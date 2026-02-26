@@ -1,0 +1,15 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up the quiz app with theme provider and renders the header, quiz component, and footer.",
+  "frontend/src/hooks/useGameState.tsx": "Core game state management using React Context, handling all simulation logic including plant growth, animal behavior (movement, feeding, reproduction, death), ecological interactions, and population statistics with proper TypeScript types including 'dead' state for animals.",
+  "frontend/src/hooks/useQueries.ts": "Empty file as all game state is managed in the frontend without backend queries.",
+  "frontend/src/components/GameScene.tsx": "3D scene component that renders the terrain, lighting, sky, plants, and animals using React Three Fiber with orbit controls for camera manipulation.",
+  "frontend/src/components/Terrain.tsx": "Renders the 3D terrain mesh with grass and soil textures, creating the ground plane for the ecosystem simulation.",
+  "frontend/src/components/PlantMesh.tsx": "Renders individual plant meshes (bushes and saplings) with textures and subtle animation effects.",
+  "frontend/src/components/AnimalMesh.tsx": "Renders animal meshes (herbivores and carnivores) with textures, movement animations, rotation based on velocity, and energy indicator bars.",
+  "frontend/src/components/ControlPanel.tsx": "UI control panel for spawning organisms, adjusting environment settings (temperature, growth rates, spawn rates), and controlling simulation playback (pause/play/reset) with proper type safety for tool selection.",
+  "frontend/src/components/StatsPanel.tsx": "Statistics display panel showing real-time population counts and historical population trends using Recharts line graphs.",
+  "frontend/src/components/Header.tsx": "Application header with monitor icon and title for the Middle School ICT Quiz with subtitle about learning computers and technology.",
+  "frontend/src/components/Footer.tsx": "Application footer with attribution and link to caffeine.ai.",
+  "frontend/src/index.css": "Global styles with school-friendly OKLCH color system featuring blue tones for both light and dark modes suitable for an educational ICT quiz application.",
+  "frontend/src/components/Quiz.tsx": "Interactive ICT quiz component with 10 questions featuring multiple-choice, true/false, and matching question types covering logging in, passwords, device use, and file management for ESL middle school students with simple English and an answer key displayed after submission."
+}
