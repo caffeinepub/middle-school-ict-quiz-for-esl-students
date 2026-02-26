@@ -1,174 +1,102 @@
 {
   "kind": "build_request",
-  "title": "Auto-Chess Game with Ancient Egyptian War Theme",
+  "title": "Egyptian Auto-Chess Game – Full Feature Polish & Bug Fixes",
   "projectName": "Pharaoh's Conquest",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Implement a full auto-chess game loop: a preparation phase where the player buys and places Egyptian units on a hex/grid board, and a combat phase where units automatically battle enemy units. Include rounds, a shop system with random unit offerings, gold economy (earn gold per round, interest mechanic), player health points that decrease on losses, and a game-over condition.",
+      "id": "REQ-8",
+      "text": "Audit and fix the App.tsx root component so it renders the full Pharaoh's Conquest game (MainMenu → GameHUD + BattleBoard + Shop + SynergyPanel + Bench) instead of the legacy quiz/ecosystem layout. Remove all references to Header, Quiz, Footer, and any non-game components from App.tsx.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-1"
         ],
         "quotes": [
-          "生成一个自走棋类型的游戏"
+          "制作一款自走棋游戏以埃及为主题"
         ]
       },
       "acceptanceCriteria": [
-        "Player can see a shop with 3–5 random Egyptian units to purchase each round",
-        "Player can drag units from bench to the battle board grid",
-        "After preparation time ends, combat phase starts automatically",
-        "Units attack enemy units autonomously during combat",
-        "Player loses HP when their army is defeated; game ends at 0 HP",
-        "Gold system: player earns gold each round and can spend it on units"
+        "App.tsx renders the Egyptian auto-chess game UI, not a quiz or ecosystem app",
+        "No quiz, header, or unrelated components appear in the rendered app",
+        "Main menu screen with 'Pharaoh's Conquest' title and Start Game button is the entry screen",
+        "Gameplay screen shows HUD, battle board, shop, synergy panel, and bench"
       ]
     },
     {
-      "id": "REQ-2",
-      "text": "Create a roster of at least 8 distinct Egyptian-themed unit types: Pharaoh (legendary melee tank), Anubis Guard (melee fighter), Ra Priest (ranged magical attacker), Isis Sorceress (healer/support), Charioteer (fast ranged), Sphinx (area-damage caster), Horus Archer (ranged DPS), and Mummy Warrior (undead melee). Each unit has name, portrait icon, tier (1–3 star upgrade), attack, HP, ability description, and an Egyptian faction/synergy tag.",
+      "id": "REQ-9",
+      "text": "Fix the HTML entry point (frontend/index.html) to set the page title to 'Pharaoh's Conquest' in English instead of the current Chinese ecosystem simulation title.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "古埃及的战争为主题",
-          "有埃及的元素"
+          "msg-1"
         ]
       },
       "acceptanceCriteria": [
-        "At least 8 unit types are selectable from the shop",
-        "Each unit displays name, tier stars, HP bar, and attack stat",
-        "Units have unique ability descriptions shown on hover/click",
-        "Synergy tags (e.g., 'Priest', 'Warrior', 'Royal') are visible on unit cards"
+        "Browser tab title reads 'Pharaoh's Conquest'",
+        "No Chinese or unrelated text appears in the HTML title tag"
       ]
     },
     {
-      "id": "REQ-3",
-      "text": "Implement a synergy/trait system with at least 4 Egyptian-themed synergies: 'Children of Ra' (Priests — bonus magic damage), 'Pharaoh's Guard' (Warriors — bonus armor), 'Desert Nomads' (Charioteers — bonus speed), 'Undead Legion' (Mummies — HP regeneration). Activating synergies at threshold counts (e.g., 2/4 units) grants passive buffs to all matching units.",
+      "id": "REQ-10",
+      "text": "Implement or complete the MainMenu screen component (if not already present as a standalone file) that shows the game title 'Pharaoh's Conquest' with Egyptian-styled typography, a Start Game button, and a How to Play button that opens HowToPlayModal. The background should use the desert background image asset.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "自走棋类型的游戏",
-          "有埃及的元素"
+          "msg-1"
         ]
       },
       "acceptanceCriteria": [
-        "Synergy panel shows all active synergies and their activation status",
-        "Placing the required number of synergy units activates the corresponding buff",
-        "Active synergy buffs are visually highlighted in the synergy panel"
+        "MainMenu renders with 'Pharaoh's Conquest' heading in Cinzel/serif font",
+        "Start Game button transitions the app into gameplay mode",
+        "How to Play button opens the HowToPlayModal dialog",
+        "Desert background image is visible behind the menu"
       ]
     },
     {
-      "id": "REQ-4",
-      "text": "Build a 2D top-down battle board using an 8×4 hex or square grid. Animate units moving toward enemies and attacking during the combat phase. Show floating damage numbers, HP bars above units, and death animations (units fade/crumble). Use Egyptian-themed visual effects: golden glow for Ra abilities, sand particle bursts for desert units, hieroglyph flash for magical spells.",
+      "id": "REQ-11",
+      "text": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations if they are referenced by the game UI. Remove any component files that belong to prior unrelated apps.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "自走棋类型的游戏",
-          "古埃及的战争为主题"
+          "msg-1"
         ]
       },
       "acceptanceCriteria": [
-        "Battle board renders as a grid with distinct friendly and enemy halves",
-        "Units visually move toward their targets during combat",
-        "HP bars update in real time during combat",
-        "Floating damage numbers appear on hit",
-        "Units have a death animation when HP reaches 0"
+        "No empty or stub component files remain that are imported by game screens",
+        "No plant, animal mesh, or ecosystem components exist in the codebase",
+        "Any ControlPanel or StatsPanel used by the game has actual Egyptian-themed content"
       ]
     },
     {
-      "id": "REQ-5",
-      "text": "Design the entire UI with an ancient Egyptian aesthetic: sandy desert color palette (gold, sand beige, turquoise, dark ochre), hieroglyph-style decorative borders on panels, papyrus-textured card backgrounds, and Egyptian iconography (scarab, Eye of Horus, ankh, pyramid silhouettes) used as decorative elements throughout the interface. Use a serif or hieroglyph-inspired font for headings.",
+      "id": "REQ-12",
+      "text": "Verify that unit portrait images at the paths defined in frontend/src/data/units.ts are correctly mapped to the generated static assets in frontend/public/assets/generated. Update any broken portrait paths so every unit card and shop card displays its correct Egyptian unit portrait.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "有埃及的元素",
-          "古埃及的战争为主题"
+          "msg-1"
         ]
       },
       "acceptanceCriteria": [
-        "Color palette is consistently gold, sand, turquoise, and ochre throughout the app",
-        "Panel borders and headers feature Egyptian-style decorative motifs",
-        "Unit cards use a papyrus-like textured background style",
-        "At least one Egyptian symbol (scarab, ankh, Eye of Horus) appears in the UI chrome"
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Create a main menu screen with the game title 'Pharaoh's Conquest', a Start Game button, and a How to Play modal explaining the auto-chess rules. Include a round tracker HUD showing current round number, player HP, current gold, and the active synergies panel during gameplay.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "生成一个自走棋类型的游戏"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Main menu displays game title and Start Game button",
-        "How to Play modal opens and explains preparation/combat phases and synergies",
-        "In-game HUD shows round number, player HP, and current gold at all times",
-        "Active synergies panel is visible during gameplay"
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Render the generated Egyptian-themed images as static assets and integrate them into the UI: use the desert background on the main menu and battle board, the Egyptian panel border frame on all game panels, and unit portrait icons on unit cards and the shop.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ],
-        "quotes": [
-          "有埃及的元素"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Main menu background uses the desert panorama image",
-        "Battle board background uses the desert battle scene image",
-        "Unit card portraits use the corresponding Egyptian unit portrait images",
-        "Panel frames use the decorative Egyptian border image"
+        "All 8 unit types display their portrait images without broken image icons",
+        "Portrait paths in units.ts resolve to real files under /assets/generated",
+        "Shop and bench unit cards both show correct portraits"
       ]
     }
   ],
   "constraints": [
-    "All game state must be managed entirely on the frontend — no backend persistence required",
-    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "Use only React, TypeScript, and Tailwind CSS — no additional game engine libraries"
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
+    "All game state must remain frontend-only; do not add backend persistence",
+    "Preserve existing game logic in useGameState.tsx, combatEngine.ts, synergyCalculator.ts, and goldEconomy.ts"
   ],
   "nonGoals": [
-    "Multiplayer or PvP networking",
-    "Backend leaderboard or save state persistence",
-    "3D rendering or Three.js-based scenes",
-    "Internet Identity authentication integration"
+    "Adding new unit types beyond the existing 8",
+    "Multiplayer or real-time features",
+    "Backend data persistence or user accounts",
+    "Changing the core auto-chess game rules or economy"
   ],
   "imageRequirements": {
-    "required": [
-      "Wide panoramic desert landscape with pyramids, sphinx silhouette, and a golden sunset sky, suitable as a menu background (egypt-menu-bg.dim_1920x1080.png)",
-      "Top-down sandy desert battle grid background with stone tile grid lines, hieroglyph markings along the border edges, and a faint desert dune horizon (egypt-battle-board.dim_1200x600.png)",
-      "Ornate Egyptian decorative panel border frame with gold hieroglyph carvings, scarab beetles at corners, and turquoise inlay accents on a dark stone background (egypt-panel-frame.dim_800x600.png)",
-      "Egyptian warrior soldier portrait bust, wearing golden armor and blue Nemes headcloth, illustrated in a stylized card art style (unit-pharaoh.dim_256x256.png)",
-      "Jackal-headed Anubis guardian warrior portrait holding a golden staff, illustrated in card art style (unit-anubis-guard.dim_256x256.png)",
-      "Robed Egyptian priest with sun disc headdress and a glowing Ra eye staff, illustrated in card art style (unit-ra-priest.dim_256x256.png)",
-      "Egyptian sorceress with Isis wings and flowing white robes, illustrated in card art style (unit-isis-sorceress.dim_256x256.png)",
-      "Ancient Egyptian chariot warrior with bow and arrow on a horse-drawn chariot, illustrated in card art style (unit-charioteer.dim_256x256.png)",
-      "Crouching stone sphinx with glowing golden eyes and ancient runes, illustrated in card art style (unit-sphinx.dim_256x256.png)",
-      "Falcon-headed Horus archer wearing red and gold armor drawing a blue energy bow, illustrated in card art style (unit-horus-archer.dim_256x256.png)",
-      "Bandaged undead Egyptian mummy warrior with glowing green eyes and a cracked khopesh sword, illustrated in card art style (unit-mummy-warrior.dim_256x256.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

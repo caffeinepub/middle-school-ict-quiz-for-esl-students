@@ -2,16 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-implement-a-full-auto-chess-game-loop-a-preparation-phase-where-the-player-buys-and-places-egyptian-units-on-a-hex-grid-board-and-a-combat-phase-where-units-automatically-battle-enemy-units-include-rounds-a-shop-system-with-random-unit-offerings-gold-economy-earn-gold-per-round-interest-mechanic-player-health-points-that-decrease-on-losses-and-a-game-over-condition",
-      "featureTitle": "Implement a full auto-chess game loop: a preparation phase where the player buys and places Egyptian units on a hex/grid board, and a combat phase where units automatically battle enemy units. Include rounds, a shop system with random unit offerings, gold economy (earn gold per round, interest mechanic), player health points that decrease on losses, and a game-over condition.",
+      "featureId": "feature-audit-and-fix-the-app-tsx-root-component-so-it-renders-the-full-pharaoh-s-conquest-game-mainmenu-gamehud-battleboard-shop-synergypanel-bench-instead-of-the-legacy-quiz-ecosystem-layout-remove-all-references-to-header-quiz-footer-and-any-non-game-components-from-app-tsx",
+      "featureTitle": "Audit and fix the App.tsx root component so it renders the full Pharaoh's Conquest game (MainMenu → GameHUD + BattleBoard + Shop + SynergyPanel + Bench) instead of the legacy quiz/ecosystem layout. Remove all references to Header, Quiz, Footer, and any non-game components from App.tsx.",
       "files": [
-        "frontend/src/components/BattleBoard.tsx",
-        "frontend/src/components/Bench.tsx",
-        "frontend/src/components/Shop.tsx",
-        "frontend/src/hooks/useGameState.tsx",
-        "frontend/src/types/game.ts",
-        "frontend/src/utils/combatEngine.ts",
-        "frontend/src/utils/goldEconomy.ts"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -21,15 +15,70 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-8"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-roster-of-at-least-8-distinct-egyptian-themed-unit-types-pharaoh-legendary-melee-tank-anubis-guard-melee-fighter-ra-priest-ranged-magical-attacker-isis-sorceress-healer-support-charioteer-fast-ranged-sphinx-area-damage-caster-horus-archer-ranged-dps-and-mummy-warrior-undead-melee-each-unit-has-name-portrait-icon-tier-1-3-star-upgrade-attack-hp-ability-description-and-an-egyptian-faction-synergy-tag",
-      "featureTitle": "Create a roster of at least 8 distinct Egyptian-themed unit types: Pharaoh (legendary melee tank), Anubis Guard (melee fighter), Ra Priest (ranged magical attacker), Isis Sorceress (healer/support), Charioteer (fast ranged), Sphinx (area-damage caster), Horus Archer (ranged DPS), and Mummy Warrior (undead melee). Each unit has name, portrait icon, tier (1–3 star upgrade), attack, HP, ability description, and an Egyptian faction/synergy tag.",
+      "featureId": "feature-fix-the-html-entry-point-frontend-index-html-to-set-the-page-title-to-pharaoh-s-conquest-in-english-instead-of-the-current-chinese-ecosystem-simulation-title",
+      "featureTitle": "Fix the HTML entry point (frontend/index.html) to set the page title to 'Pharaoh's Conquest' in English instead of the current Chinese ecosystem simulation title.",
       "files": [
-        "frontend/src/components/UnitCard.tsx",
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-or-complete-the-mainmenu-screen-component-if-not-already-present-as-a-standalone-file-that-shows-the-game-title-pharaoh-s-conquest-with-egyptian-styled-typography-a-start-game-button-and-a-how-to-play-button-that-opens-howtoplaymodal-the-background-should-use-the-desert-background-image-asset",
+      "featureTitle": "Implement or complete the MainMenu screen component (if not already present as a standalone file) that shows the game title 'Pharaoh's Conquest' with Egyptian-styled typography, a Start Game button, and a How to Play button that opens HowToPlayModal. The background should use the desert background image asset.",
+      "files": [
+        "frontend/src/components/MainMenu.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-all-empty-stub-components-controlpanel-tsx-gamescene-tsx-statspanel-tsx-terrain-tsx-plantmesh-tsx-animalmesh-tsx-are-either-removed-from-the-project-or-replaced-with-meaningful-egyptian-auto-chess-implementations-if-they-are-referenced-by-the-game-ui-remove-any-component-files-that-belong-to-prior-unrelated-apps",
+      "featureTitle": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations if they are referenced by the game UI. Remove any component files that belong to prior unrelated apps.",
+      "files": [
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/Header.tsx",
+        "frontend/src/components/Quiz.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-verify-that-unit-portrait-images-at-the-paths-defined-in-frontend-src-data-units-ts-are-correctly-mapped-to-the-generated-static-assets-in-frontend-public-assets-generated-update-any-broken-portrait-paths-so-every-unit-card-and-shop-card-displays-its-correct-egyptian-unit-portrait",
+      "featureTitle": "Verify that unit portrait images at the paths defined in frontend/src/data/units.ts are correctly mapped to the generated static assets in frontend/public/assets/generated. Update any broken portrait paths so every unit card and shop card displays its correct Egyptian unit portrait.",
+      "files": [
         "frontend/src/data/units.ts"
       ],
       "components": [
@@ -40,106 +89,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-a-synergy-trait-system-with-at-least-4-egyptian-themed-synergies-children-of-ra-priests-bonus-magic-damage-pharaoh-s-guard-warriors-bonus-armor-desert-nomads-charioteers-bonus-speed-undead-legion-mummies-hp-regeneration-activating-synergies-at-threshold-counts-e-g-2-4-units-grants-passive-buffs-to-all-matching-units",
-      "featureTitle": "Implement a synergy/trait system with at least 4 Egyptian-themed synergies: 'Children of Ra' (Priests — bonus magic damage), 'Pharaoh's Guard' (Warriors — bonus armor), 'Desert Nomads' (Charioteers — bonus speed), 'Undead Legion' (Mummies — HP regeneration). Activating synergies at threshold counts (e.g., 2/4 units) grants passive buffs to all matching units.",
-      "files": [
-        "frontend/src/components/SynergyPanel.tsx",
-        "frontend/src/data/synergies.ts",
-        "frontend/src/utils/synergyCalculator.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-build-a-2d-top-down-battle-board-using-an-8-4-hex-or-square-grid-animate-units-moving-toward-enemies-and-attacking-during-the-combat-phase-show-floating-damage-numbers-hp-bars-above-units-and-death-animations-units-fade-crumble-use-egyptian-themed-visual-effects-golden-glow-for-ra-abilities-sand-particle-bursts-for-desert-units-hieroglyph-flash-for-magical-spells",
-      "featureTitle": "Build a 2D top-down battle board using an 8×4 hex or square grid. Animate units moving toward enemies and attacking during the combat phase. Show floating damage numbers, HP bars above units, and death animations (units fade/crumble). Use Egyptian-themed visual effects: golden glow for Ra abilities, sand particle bursts for desert units, hieroglyph flash for magical spells.",
-      "files": [
-        "frontend/src/components/BattleBoard.tsx",
-        "frontend/src/components/GridTile.tsx",
-        "frontend/src/components/UnitSprite.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-design-the-entire-ui-with-an-ancient-egyptian-aesthetic-sandy-desert-color-palette-gold-sand-beige-turquoise-dark-ochre-hieroglyph-style-decorative-borders-on-panels-papyrus-textured-card-backgrounds-and-egyptian-iconography-scarab-eye-of-horus-ankh-pyramid-silhouettes-used-as-decorative-elements-throughout-the-interface-use-a-serif-or-hieroglyph-inspired-font-for-headings",
-      "featureTitle": "Design the entire UI with an ancient Egyptian aesthetic: sandy desert color palette (gold, sand beige, turquoise, dark ochre), hieroglyph-style decorative borders on panels, papyrus-textured card backgrounds, and Egyptian iconography (scarab, Eye of Horus, ankh, pyramid silhouettes) used as decorative elements throughout the interface. Use a serif or hieroglyph-inspired font for headings.",
-      "files": [
-        "frontend/src/components/EgyptianPanel.tsx",
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-5"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-create-a-main-menu-screen-with-the-game-title-pharaoh-s-conquest-a-start-game-button-and-a-how-to-play-modal-explaining-the-auto-chess-rules-include-a-round-tracker-hud-showing-current-round-number-player-hp-current-gold-and-the-active-synergies-panel-during-gameplay",
-      "featureTitle": "Create a main menu screen with the game title 'Pharaoh's Conquest', a Start Game button, and a How to Play modal explaining the auto-chess rules. Include a round tracker HUD showing current round number, player HP, current gold, and the active synergies panel during gameplay.",
-      "files": [
-        "frontend/src/components/GameHUD.tsx",
-        "frontend/src/components/HowToPlayModal.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-6"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-render-the-generated-egyptian-themed-images-as-static-assets-and-integrate-them-into-the-ui-use-the-desert-background-on-the-main-menu-and-battle-board-the-egyptian-panel-border-frame-on-all-game-panels-and-unit-portrait-icons-on-unit-cards-and-the-shop",
-      "featureTitle": "Render the generated Egyptian-themed images as static assets and integrate them into the UI: use the desert background on the main menu and battle board, the Egyptian panel border frame on all game panels, and unit portrait icons on unit cards and the shop.",
-      "files": [
-        "frontend/src/components/BattleBoard.tsx",
-        "frontend/src/components/EgyptianPanel.tsx",
-        "frontend/src/data/units.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-7"
+        "REQ-12"
       ],
       "confidence": "high"
     }

@@ -1,93 +1,91 @@
 import React from 'react';
 import { useGameState } from '../hooks/useGameState';
-import { calculateSynergies } from '../utils/synergyCalculator';
-import { SYNERGY_DEFINITIONS } from '../data/synergies';
-import EgyptianPanel from './EgyptianPanel';
-import { cn } from '@/lib/utils';
+import { SYNERGY_DEFINITIONS } from '../data/units';
 
 export default function SynergyPanel() {
-    const { state } = useGameState();
-    const activeSynergies = calculateSynergies(state.board);
+  const { state } = useGameState();
+  const { activeSynergies } = state;
 
-    return (
-        <EgyptianPanel title="Synergies" titleIcon="𓂀" compact>
-            <div className="flex flex-col gap-1.5">
-                {SYNERGY_DEFINITIONS.map(synergy => {
-                    const active = activeSynergies.find(s => s.synergyId === synergy.id);
-                    const count = active?.count || 0;
-                    const activeThreshold = active?.activeThreshold || null;
-                    const isActive = activeThreshold !== null;
-                    const nextThreshold = synergy.thresholds.find(t => t > count);
+  const activeSynergyList = Object.entries(activeSynergies)
+    .filter(([, count]) => count > 0)
+    .sort((a, b) => b[1] - a[1]);
 
-                    return (
-                        <div
-                            key={synergy.id}
-                            className={cn(
-                                'rounded-sm p-1.5 border transition-all',
-                                isActive
-                                    ? 'border-[oklch(0.78_0.15_85_/_0.6)] bg-[oklch(0.25_0.06_60_/_0.5)] animate-pulse-gold'
-                                    : 'border-[oklch(0.30_0.06_50_/_0.4)] bg-[oklch(0.20_0.04_50_/_0.3)]'
-                            )}
-                        >
-                            <div className="flex items-center gap-1.5">
-                                <span className="text-sm">{synergy.icon}</span>
-                                <div className="flex-1 min-w-0">
-                                    <p className={cn(
-                                        'font-cinzel font-semibold text-[9px] leading-tight',
-                                        isActive ? 'text-[oklch(0.88_0.18_88)]' : 'text-[oklch(0.60_0.08_70)]'
-                                    )}>
-                                        {synergy.name}
-                                    </p>
-                                    <p className="text-[oklch(0.55_0.06_70)] text-[8px] leading-tight truncate">
-                                        {synergy.faction}
-                                    </p>
-                                </div>
-                                {/* Threshold indicators */}
-                                <div className="flex gap-0.5">
-                                    {synergy.thresholds.map(threshold => (
-                                        <div
-                                            key={threshold}
-                                            className={cn(
-                                                'w-5 h-5 rounded-sm flex items-center justify-center text-[8px] font-cinzel font-bold border',
-                                                count >= threshold
-                                                    ? 'bg-[oklch(0.78_0.15_85)] text-[oklch(0.15_0.04_55)] border-[oklch(0.88_0.18_88)]'
-                                                    : 'bg-[oklch(0.20_0.04_50)] text-[oklch(0.50_0.08_70)] border-[oklch(0.35_0.06_50)]'
-                                            )}
-                                        >
-                                            {threshold}
-                                        </div>
-                                    ))}
-                                </div>
-                                {/* Count */}
-                                <div className={cn(
-                                    'text-[9px] font-cinzel font-bold min-w-[16px] text-center',
-                                    isActive ? 'text-[oklch(0.88_0.18_88)]' : 'text-[oklch(0.50_0.08_70)]'
-                                )}>
-                                    {count}
-                                </div>
-                            </div>
+  return (
+    <div className="egyptian-panel p-3 flex flex-col gap-2">
+      <h3 className="cinzel text-egyptian-gold font-bold text-sm tracking-wider">✨ Synergies</h3>
 
-                            {/* Active bonus description */}
-                            {isActive && (
-                                <div className="mt-1 pl-6">
-                                    <p className="text-[oklch(0.72_0.14_195)] text-[8px] leading-tight">
-                                        ✦ {synergy.bonusDescriptions[synergy.thresholds.indexOf(activeThreshold!)]}
-                                    </p>
-                                </div>
-                            )}
+      {activeSynergyList.length === 0 ? (
+        <div className="text-egyptian-sand/40 text-xs cinzel text-center py-2">
+          Place units to activate synergies
+        </div>
+      ) : (
+        <div className="flex flex-col gap-1.5">
+          {activeSynergyList.map(([trait, count]) => {
+            const synDef = SYNERGY_DEFINITIONS[trait as keyof typeof SYNERGY_DEFINITIONS];
+            if (!synDef) return null;
 
-                            {/* Progress to next threshold */}
-                            {!isActive && nextThreshold && (
-                                <div className="mt-0.5 pl-6">
-                                    <p className="text-[oklch(0.45_0.06_70)] text-[8px]">
-                                        Need {nextThreshold - count} more
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-        </EgyptianPanel>
-    );
+            // Find active threshold
+            const activeThreshold = [...synDef.thresholds]
+              .reverse()
+              .find(t => count >= t.count);
+            const nextThreshold = synDef.thresholds.find(t => count < t.count);
+            const isActive = !!activeThreshold;
+
+            return (
+              <div
+                key={trait}
+                className={`flex items-start gap-2 p-1.5 rounded-sm border transition-all
+                  ${isActive
+                    ? 'border-egyptian-gold/40 bg-egyptian-gold/5'
+                    : 'border-egyptian-gold/10 bg-transparent opacity-60'
+                  }
+                `}
+              >
+                <span className="text-base leading-none mt-0.5">{synDef.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className={`cinzel text-xs font-semibold ${isActive ? 'text-egyptian-gold' : 'text-egyptian-sand/60'}`}>
+                      {synDef.name}
+                    </span>
+                    <span className={`cinzel text-xs px-1 rounded ${isActive ? 'bg-egyptian-gold/20 text-egyptian-gold' : 'bg-egyptian-dark/50 text-egyptian-sand/40'}`}>
+                      {count}
+                    </span>
+                  </div>
+                  {isActive && (
+                    <div className="text-egyptian-turquoise text-xs mt-0.5 leading-tight">
+                      {activeThreshold!.bonus}
+                    </div>
+                  )}
+                  {nextThreshold && (
+                    <div className="text-egyptian-sand/40 text-xs mt-0.5 leading-tight">
+                      Next: {nextThreshold.count} → {nextThreshold.bonus}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* All synergies reference */}
+      <details className="mt-1">
+        <summary className="cinzel text-egyptian-sand/40 text-xs cursor-pointer hover:text-egyptian-sand/60 transition-colors">
+          All Synergies ▾
+        </summary>
+        <div className="mt-2 flex flex-col gap-1">
+          {Object.entries(SYNERGY_DEFINITIONS).map(([key, syn]) => {
+            const count = activeSynergies[key] || 0;
+            return (
+              <div key={key} className="flex items-center gap-1.5 text-xs opacity-50 hover:opacity-80 transition-opacity">
+                <span>{syn.icon}</span>
+                <span className="cinzel text-egyptian-sand">{syn.name}</span>
+                <span className="text-egyptian-sand/40">({count}/{syn.thresholds[0].count})</span>
+              </div>
+            );
+          })}
+        </div>
+      </details>
+    </div>
+  );
 }

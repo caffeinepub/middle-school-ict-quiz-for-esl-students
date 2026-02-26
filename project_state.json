@@ -1,11 +1,10 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 5,
   "summary": "Auto-chess (自走棋) game with ancient Egyptian war theme and Egyptian elements",
   "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Wide panoramic desert landscape with pyramids, sphinx silhouette, and a golden sunset sky, suitable as a menu background (egypt-menu-bg.dim_1920x1080.png)\n- Top-down sandy desert battle grid background with stone tile grid lines, hieroglyph markings along the border edges, and a faint desert dune horizon (egypt-battle-board.dim_1200x600.png)\n- Ornate Egyptian decorative panel border frame with gold hieroglyph carvings, scarab beetles at corners, and turquoise inlay accents on a dark stone background (egypt-panel-frame.dim_800x600.png)\n- Egyptian warrior soldier portrait bust, wearing golden armor and blue Nemes headcloth, illustrated in a stylized card art style (unit-pharaoh.dim_256x256.png)\n- Jackal-headed Anubis guardian warrior portrait holding a golden staff, illustrated in card art style (unit-anubis-guard.dim_256x256.png)\n- Robed Egyptian priest with sun disc headdress and a glowing Ra eye staff, illustrated in card art style (unit-ra-priest.dim_256x256.png)\n- Egyptian sorceress with Isis wings and flowing white robes, illustrated in card art style (unit-isis-sorceress.dim_256x256.png)\n- Ancient Egyptian chariot warrior with bow and arrow on a horse-drawn chariot, illustrated in card art style (unit-charioteer.dim_256x256.png)\n- Crouching stone sphinx with glowing golden eyes and ancient runes, illustrated in card art style (unit-sphinx.dim_256x256.png)\n- Falcon-headed Horus archer wearing red and gold armor drawing a blue energy bow, illustrated in card art style (unit-horus-archer.dim_256x256.png)\n- Bandaged undead Egyptian mummy warrior with glowing green eyes and a cracked khopesh sword, illustrated in card art style (unit-mummy-warrior.dim_256x256.png)",
   "existing_features": [
     {
       "id": "feature-implement-a-full-auto-chess-game-loop-a-preparation-phase-where-the-player-buys-and-places-egyptian-units-on-a-hex-grid-board-and-a-combat-phase-where-units-automatically-battle-enemy-units-include-rounds-a-shop-system-with-random-unit-offerings-gold-economy-earn-gold-per-round-interest-mechanic-player-health-points-that-decrease-on-losses-and-a-game-over-condition",
@@ -60,6 +59,46 @@
       "title": "Render the generated Egyptian-themed images as static assets and integrate them into the UI: use the desert background on the main menu and battle board, the Egyptian panel border frame on all game panels, and unit portrait icons on unit cards and the shop.",
       "reqIds": [
         "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-audit-and-fix-the-app-tsx-root-component-so-it-renders-the-full-pharaoh-s-conquest-game-mainmenu-gamehud-battleboard-shop-synergypanel-bench-instead-of-the-legacy-quiz-ecosystem-layout-remove-all-references-to-header-quiz-footer-and-any-non-game-components-from-app-tsx",
+      "title": "Audit and fix the App.tsx root component so it renders the full Pharaoh's Conquest game (MainMenu → GameHUD + BattleBoard + Shop + SynergyPanel + Bench) instead of the legacy quiz/ecosystem layout. Remove all references to Header, Quiz, Footer, and any non-game components from App.tsx.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-html-entry-point-frontend-index-html-to-set-the-page-title-to-pharaoh-s-conquest-in-english-instead-of-the-current-chinese-ecosystem-simulation-title",
+      "title": "Fix the HTML entry point (frontend/index.html) to set the page title to 'Pharaoh's Conquest' in English instead of the current Chinese ecosystem simulation title.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-or-complete-the-mainmenu-screen-component-if-not-already-present-as-a-standalone-file-that-shows-the-game-title-pharaoh-s-conquest-with-egyptian-styled-typography-a-start-game-button-and-a-how-to-play-button-that-opens-howtoplaymodal-the-background-should-use-the-desert-background-image-asset",
+      "title": "Implement or complete the MainMenu screen component (if not already present as a standalone file) that shows the game title 'Pharaoh's Conquest' with Egyptian-styled typography, a Start Game button, and a How to Play button that opens HowToPlayModal. The background should use the desert background image asset.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-all-empty-stub-components-controlpanel-tsx-gamescene-tsx-statspanel-tsx-terrain-tsx-plantmesh-tsx-animalmesh-tsx-are-either-removed-from-the-project-or-replaced-with-meaningful-egyptian-auto-chess-implementations-if-they-are-referenced-by-the-game-ui-remove-any-component-files-that-belong-to-prior-unrelated-apps",
+      "title": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations if they are referenced by the game UI. Remove any component files that belong to prior unrelated apps.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-unit-portrait-images-at-the-paths-defined-in-frontend-src-data-units-ts-are-correctly-mapped-to-the-generated-static-assets-in-frontend-public-assets-generated-update-any-broken-portrait-paths-so-every-unit-card-and-shop-card-displays-its-correct-egyptian-unit-portrait",
+      "title": "Verify that unit portrait images at the paths defined in frontend/src/data/units.ts are correctly mapped to the generated static assets in frontend/public/assets/generated. Update any broken portrait paths so every unit card and shop card displays its correct Egyptian unit portrait.",
+      "reqIds": [
+        "REQ-12"
       ],
       "version": 1
     }

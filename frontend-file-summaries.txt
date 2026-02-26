@@ -1,6 +1,6 @@
 {
-  "frontend/src/App.tsx": "Main application component that sets up the quiz app with theme provider and renders the header, quiz component, and footer.",
-  "frontend/src/hooks/useGameState.tsx": "Core game state management using React Context, handling all simulation logic including plant growth, animal behavior (movement, feeding, reproduction, death), ecological interactions, and population statistics with proper TypeScript types including 'dead' state for animals.",
+  "frontend/src/App.tsx": "Root application component wrapping QueryClientProvider, ThemeProvider, and GameProvider, routing between MainMenu, the full gameplay screen (HUD + board + shop + synergies + bench), and GameOverScreen based on game state.",
+  "frontend/src/hooks/useGameState.tsx": "Core game state management using React Context providing all auto-chess game logic including shop generation, enemy board generation, battle simulation, unit placement, synergy calculation, gold economy, and round progression.",
   "frontend/src/hooks/useQueries.ts": "Empty file as all game state is managed in the frontend without backend queries.",
   "frontend/src/components/GameScene.tsx": "3D scene component that renders the terrain, lighting, sky, plants, and animals using React Three Fiber with orbit controls for camera manipulation.",
   "frontend/src/components/Terrain.tsx": "Renders the 3D terrain mesh with grass and soil textures, creating the ground plane for the ecosystem simulation.",
@@ -10,6 +10,18 @@
   "frontend/src/components/StatsPanel.tsx": "Statistics display panel showing real-time population counts and historical population trends using Recharts line graphs.",
   "frontend/src/components/Header.tsx": "Application header with monitor icon and title for the Middle School ICT Quiz with subtitle about learning computers and technology.",
   "frontend/src/components/Footer.tsx": "Application footer with attribution and link to caffeine.ai.",
-  "frontend/src/index.css": "Global styles with school-friendly OKLCH color system featuring blue tones for both light and dark modes suitable for an educational ICT quiz application.",
-  "frontend/src/components/Quiz.tsx": "Interactive ICT quiz component with 10 questions featuring multiple-choice, true/false, and matching question types covering logging in, passwords, device use, and file management for ESL middle school students with simple English and an answer key displayed after submission."
+  "frontend/src/index.css": "Global styles with Egyptian-themed OKLCH color system featuring gold, turquoise, sand, lapis, and crimson tokens, plus custom component classes for panels, buttons, unit cards, and animations.",
+  "frontend/src/components/Quiz.tsx": "Interactive ICT quiz component with 10 questions featuring multiple-choice, true/false, and matching question types covering logging in, passwords, device use, and file management for ESL middle school students with simple English and an answer key displayed after submission.",
+  "frontend/index.html": "HTML entry point with page title set to \"Pharaoh's Conquest\" and Google Fonts imports for Cinzel, Cinzel Decorative, and EB Garamond.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending with Egyptian color tokens, Cinzel/Garamond font families, and custom box shadows for the auto-chess game theme.",
+  "frontend/src/data/units.ts": "Defines all 8 Egyptian unit types (Ra Priest, Mummy Warrior, Horus Archer, Sphinx, Anubis Guard, Isis Sorceress, Charioteer, Pharaoh) with stats, abilities, traits, and correct portrait paths, plus 8 synergy definitions.",
+  "frontend/src/components/MainMenu.tsx": "Full-screen Egyptian-themed main menu with desert background, Pharaoh's Conquest title in Cinzel Decorative font, Start Game and How to Play buttons, unit portrait preview row, and a How to Play modal dialog.",
+  "frontend/src/components/GameHUD.tsx": "Top HUD bar showing round number, player HP bar, gold, level/XP bar, win/loss record, and win streak with Egyptian gold styling.",
+  "frontend/src/components/BattleBoard.tsx": "7×4 grid battle board for both player and enemy armies with drag-and-drop unit placement, unit tokens showing portraits/HP bars/star levels, and battle status banners. Fixed TypeScript errors: `cells` array is now explicitly typed as `React.ReactElement[]`, and `UnitToken`'s `onClick` prop accepts `(e: React.MouseEvent) => void`.",
+  "frontend/src/components/Shop.tsx": "Shop panel showing 5 purchasable unit cards with portraits, traits, and costs, plus Reroll, Lock, Buy XP, Battle, and Next Round action buttons.",
+  "frontend/src/components/Bench.tsx": "9-slot bench panel displaying owned units with drag support, sell-on-hover buttons, and empty slot indicators.",
+  "frontend/src/components/SynergyPanel.tsx": "Synergy tracker showing active trait counts, active bonuses, next threshold previews, and a collapsible reference of all synergies.",
+  "frontend/src/components/UnitDetail.tsx": "Selected unit detail panel showing portrait, name, title, star level, traits, HP bar, stats grid, ability description, and Bench/Sell action buttons.",
+  "frontend/src/components/BattleLog.tsx": "Scrollable battle log panel that displays combat event messages during and after battles.",
+  "frontend/src/components/GameOverScreen.tsx": "Full-screen game over screen with Egyptian background, victory/defeat messaging, round/win/loss stats, and Play Again/Main Menu buttons."
 }
