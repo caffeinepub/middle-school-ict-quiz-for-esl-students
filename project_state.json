@@ -1,10 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 7,
   "summary": "Auto-chess (自走棋) game with ancient Egyptian war theme and Egyptian elements",
-  "architectural_notes": [],
+  "architectural_notes": [
+    "Battle board grid should use regular hexagons instead of squares/hex approximations",
+    "Visual style reference: Iron Command (钢铁命令) — tactical/strategic war game aesthetics for overall layout and UI presentation"
+  ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Aerial night-view Egyptian battlefield with dark sandy terrain, moonlit dune contours, faint hieroglyph map markings, and a tactical grid overlay texture (battle-board-dark-bg.dim_1920x1080.png)\n- Aged bronze and ember-gold command panel border frame with riveted corner details and worn parchment center texture (command-panel-frame-dark.dim_960x640.png)",
   "existing_features": [
     {
       "id": "feature-implement-a-full-auto-chess-game-loop-a-preparation-phase-where-the-player-buys-and-places-egyptian-units-on-a-hex-grid-board-and-a-combat-phase-where-units-automatically-battle-enemy-units-include-rounds-a-shop-system-with-random-unit-offerings-gold-economy-earn-gold-per-round-interest-mechanic-player-health-points-that-decrease-on-losses-and-a-game-over-condition",
@@ -101,12 +105,50 @@
         "REQ-12"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-square-grid-cells-in-battleboard-tsx-and-gridtile-tsx-with-regular-hexagons-pointy-top-or-flat-top-orientation-implement-a-proper-hex-grid-layout-for-the-7-4-player-and-7-4-enemy-sections-using-offset-or-axial-coordinates-hexagon-tiles-should-use-css-clip-path-or-svg-polygon-to-render-the-correct-six-sided-shape-unit-sprites-hp-bars-and-drag-and-drop-logic-must-be-adapted-to-work-on-the-hexagonal-grid-gaps-between-hex-tiles-should-use-standard-hex-grid-spacing-so-tiles-tessellate-correctly",
+      "title": "Replace the current square grid cells in BattleBoard.tsx and GridTile.tsx with regular hexagons (pointy-top or flat-top orientation). Implement a proper hex grid layout for the 7×4 (player) and 7×4 (enemy) sections using offset or axial coordinates. Hexagon tiles should use CSS clip-path or SVG polygon to render the correct six-sided shape. Unit sprites, HP bars, and drag-and-drop logic must be adapted to work on the hexagonal grid. Gaps between hex tiles should use standard hex grid spacing so tiles tessellate correctly.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-overhaul-the-overall-visual-presentation-of-the-game-inspired-by-the-iron-command-real-time-strategy-aesthetic-a-gritty-high-contrast-war-room-look-with-sharp-panel-edges-tactical-overlay-styling-and-a-darker-base-palette-deep-desert-night-tones-dark-sand-aged-bronze-deep-lapis-ember-gold-contrasted-by-bright-unit-highlight-colors-the-battle-board-should-feel-like-a-tactical-command-map-add-a-subtle-grid-coordinate-label-system-column-letters-row-numbers-along-the-board-edges-a-dark-vignette-border-around-the-board-and-unit-tokens-that-look-like-military-unit-markers-with-bold-iconography-the-hud-should-be-redesigned-to-resemble-a-tactical-command-interface-with-segmented-stat-blocks-hp-gold-round-streak-displayed-in-sharp-bordered-panels-shop-cards-should-adopt-a-compact-military-briefing-card-style-all-panels-synergypanel-shop-bench-hud-should-use-dark-backgrounds-with-gold-and-bronze-accent-borders-typography-for-labels-and-stats-should-shift-to-a-monospaced-or-condensed-sans-serif-for-stat-numbers-while-headings-retain-the-egyptian-serif-font",
+      "title": "Overhaul the overall visual presentation of the game inspired by the Iron Command (钢铁命令) real-time strategy aesthetic: a gritty, high-contrast war-room look with sharp panel edges, tactical overlay styling, and a darker base palette (deep desert night tones — dark sand, aged bronze, deep lapis, ember gold) contrasted by bright unit highlight colors. The battle board should feel like a tactical command map: add a subtle grid coordinate label system (column letters, row numbers) along the board edges, a dark vignette border around the board, and unit tokens that look like military unit markers with bold iconography. The HUD should be redesigned to resemble a tactical command interface with segmented stat blocks (HP, Gold, Round, Streak) displayed in sharp bordered panels. Shop cards should adopt a compact military-briefing card style. All panels (SynergyPanel, Shop, Bench, HUD) should use dark backgrounds with gold and bronze accent borders. Typography for labels and stats should shift to a monospaced or condensed sans-serif for stat numbers while headings retain the Egyptian serif font.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-global-tailwind-css-design-tokens-in-frontend-src-index-css-and-frontend-tailwind-config-js-to-introduce-the-new-dark-tactical-palette-add-css-custom-properties-for-deep-sand-dark-aged-bronze-ember-gold-deep-lapis-dark-and-command-panel-background-colors-ensure-these-tokens-are-applied-consistently-across-all-game-components-updated-in-req-14",
+      "title": "Update the global Tailwind CSS design tokens in frontend/src/index.css and frontend/tailwind.config.js to introduce the new dark tactical palette: add CSS custom properties for deep-sand-dark, aged-bronze, ember-gold, deep-lapis-dark, and command-panel background colors. Ensure these tokens are applied consistently across all game components updated in REQ-14.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-a-new-dark-tactical-desert-battle-board-background-image-to-replace-or-supplement-the-existing-desert-background-the-image-should-evoke-a-night-time-aerial-view-of-an-egyptian-battlefield-with-a-dark-sandy-terrain-subtle-moonlit-dune-contours-faint-hieroglyph-map-markings-and-a-tactical-grid-overlay-texture-use-dimensions-1920-1080px-also-generate-an-updated-dark-command-panel-frame-border-image-for-the-game-panels-with-aged-bronze-and-ember-gold-tones-riveted-corner-details-and-worn-parchment-texture-use-dimensions-960-640px",
+      "title": "Generate a new dark tactical desert battle board background image to replace or supplement the existing desert background. The image should evoke a night-time aerial view of an Egyptian battlefield with a dark sandy terrain, subtle moonlit dune contours, faint hieroglyph map markings, and a tactical grid overlay texture. Use dimensions 1920×1080px. Also generate an updated dark command panel frame/border image for the game panels, with aged bronze and ember-gold tones, riveted corner details, and worn parchment texture. Use dimensions 960×640px.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
     {
       "id": "AR-1",
       "summary": "Auto-chess game with ancient Egyptian war theme featuring Egyptian units, elements, and aesthetics",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Change grid cells to regular hexagons and optimize the visual presentation inspired by Iron Command (钢铁命令) aesthetics",
       "reqIds": [],
       "status": "pending"
     }

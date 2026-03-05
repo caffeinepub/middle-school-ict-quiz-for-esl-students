@@ -1,73 +1,66 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T02:00:14.702Z",
-  "summary": "The diff implements most of the required features for the Egyptian auto-chess game polish. REQ-8, REQ-9, REQ-10, and REQ-12 are well-addressed. REQ-11 is partially addressed: App.tsx and game components are properly updated, but stub/legacy files (GameScene.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx, ControlPanel.tsx, StatsPanel.tsx, Header.tsx, Quiz.tsx, Footer.tsx) are listed as modified (not removed) and the frontend-file-summaries.txt still describes them as functioning ecosystem/quiz components, indicating they were not removed from the project.",
+  "generatedAt": "2026-02-27T03:00:35.105Z",
+  "summary": "The diff implements most of the required changes: hexagonal grid (REQ-13), Iron Command visual overhaul (REQ-14), new Tailwind/CSS tokens (REQ-15), and some parts of REQ-16. However, the generated image assets for REQ-16 are not present in the diff, and GridTile.tsx is not updated. The panel frame image application to EgyptianPanel is also not confirmed.",
   "missing_requirements": [
     {
-      "id": "REQ-11",
-      "requirement": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations. Remove any component files that belong to prior unrelated apps.",
-      "reason": "The diff shows Header.tsx, Footer.tsx, Quiz.tsx, GameScene.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx, ControlPanel.tsx, and StatsPanel.tsx as modified files, not removed. The frontend-file-summaries.txt still describes these files with their original ecosystem/quiz purposes. No removals are listed in the diff. The acceptance criteria requiring no plant/animal mesh/ecosystem components in the codebase is not met.",
+      "id": "REQ-16",
+      "requirement": "A new dark battle board background image (battle-board-dark-bg.dim_1920x1080.png) must be saved in frontend/public/assets/generated.",
+      "reason": "No file addition under frontend/public/assets/generated/battle-board-dark-bg.dim_1920x1080.png is present in the diff. Only 1 file was added (hexGrid.ts).",
       "evidence": [
-        "frontend/src/components/Header.tsx",
-        "frontend/src/components/Footer.tsx",
-        "frontend/src/components/Quiz.tsx",
-        "frontend/src/components/GameScene.tsx",
-        "frontend/src/components/Terrain.tsx",
-        "frontend/src/components/PlantMesh.tsx",
-        "frontend/src/components/AnimalMesh.tsx",
-        "frontend/src/components/ControlPanel.tsx",
-        "frontend/src/components/StatsPanel.tsx",
-        "frontend-file-summaries.txt"
+        "frontend/src/components/BattleBoard.tsx"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "requirement": "A new dark command panel border/frame image (command-panel-frame-dark.dim_960x640.png) must be saved in frontend/public/assets/generated.",
+      "reason": "No file addition for command-panel-frame-dark.dim_960x640.png is present in the diff. The diff shows only 1 added file (hexGrid.ts).",
+      "evidence": []
+    },
+    {
+      "id": "REQ-16",
+      "requirement": "The new panel frame image must be applied to EgyptianPanel and all major game panels.",
+      "reason": "There is no EgyptianPanel component modified in the diff, and no reference to the command-panel-frame-dark image being applied anywhere in the changed files.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "GridTile.tsx must be updated to use hexagonal cell rendering.",
+      "reason": "The diff does not include GridTile.tsx as a modified or added file. Only BattleBoard.tsx is modified for hex grid rendering.",
+      "evidence": [
+        "frontend/src/components/BattleBoard.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "GameOverScreen component with victory/defeat detection and Play Again / Main Menu navigation",
-      "reason": "The build request does not mention a GameOverScreen component explicitly in REQ-8 through REQ-12. The gameplay screen requirements list only HUD, battle board, shop, synergy panel, and bench.",
+      "description": "Scanline texture overlay on the MainMenu using repeating-linear-gradient",
+      "reason": "The build request does not specify a scanline texture overlay effect on the main menu. This is an additional visual feature not described in any requirement.",
       "evidence": [
-        "frontend/src/components/GameOverScreen.tsx",
-        "frontend/src/App.tsx"
+        "frontend/src/components/MainMenu.tsx"
       ]
     },
     {
-      "description": "BattleLog component added as a new standalone file rendered in the gameplay screen",
-      "reason": "None of REQ-8 through REQ-12 explicitly request a BattleLog component. The gameplay screen layout in REQ-8 lists HUD, battle board, shop, synergy panel, and bench with no mention of a battle log.",
+      "description": "Hieroglyph Unicode character row as a decorative element on the MainMenu",
+      "reason": "No requirement specifies adding a row of Unicode hieroglyph characters as a decorative element on the main menu.",
       "evidence": [
-        "frontend/src/components/BattleLog.tsx",
-        "frontend/src/App.tsx"
-      ]
-    },
-    {
-      "description": "UnitDetail component added as a new standalone file in the left panel of the gameplay screen",
-      "reason": "REQ-8 specifies the gameplay screen shows HUD, battle board, shop, synergy panel, and bench. UnitDetail is not listed as a required component in any of the requirements.",
-      "evidence": [
-        "frontend/src/components/UnitDetail.tsx",
-        "frontend/src/App.tsx"
+        "frontend/src/components/MainMenu.tsx"
       ]
     }
   ],
   "confidence": 0.78,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/index.html",
-    "frontend/src/App.tsx",
     "frontend/src/components/BattleBoard.tsx",
-    "frontend/src/components/BattleLog.tsx",
     "frontend/src/components/Bench.tsx",
-    "frontend/src/components/Footer.tsx",
     "frontend/src/components/GameHUD.tsx",
     "frontend/src/components/GameOverScreen.tsx",
-    "frontend/src/components/Header.tsx",
     "frontend/src/components/MainMenu.tsx",
-    "frontend/src/components/Quiz.tsx",
     "frontend/src/components/Shop.tsx",
     "frontend/src/components/SynergyPanel.tsx",
-    "frontend/src/components/UnitDetail.tsx",
-    "frontend/src/data/units.ts",
-    "frontend/src/hooks/useGameState.tsx",
     "frontend/src/index.css",
+    "frontend/src/utils/hexGrid.ts",
     "frontend/tailwind.config.js",
     "project_state.json"
   ]

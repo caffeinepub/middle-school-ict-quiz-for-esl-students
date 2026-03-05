@@ -20,70 +20,100 @@ export default function MainMenu({ onStartGame }: MainMenuProps) {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-egyptian-dark/70" />
+      {/* Dark tactical overlay */}
+      <div className="absolute inset-0" style={{
+        background: 'linear-gradient(180deg, oklch(0.06 0.02 55 / 0.85) 0%, oklch(0.08 0.03 55 / 0.75) 50%, oklch(0.06 0.02 55 / 0.90) 100%)'
+      }} />
 
-      {/* Decorative top border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-egyptian-gold to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-egyptian-gold to-transparent" />
+      {/* Scanline texture overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, oklch(0.05 0.01 55 / 0.15) 2px, oklch(0.05 0.01 55 / 0.15) 4px)',
+      }} />
+
+      {/* Top border */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-ember-gold to-transparent" />
+      <div className="absolute top-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-aged-bronze/50 to-transparent" />
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-ember-gold to-transparent" />
+
+      {/* Corner decorations */}
+      <div className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-ember-gold/50" />
+      <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-ember-gold/50" />
+      <div className="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-ember-gold/50" />
+      <div className="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-ember-gold/50" />
 
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center gap-8 px-4">
         {/* Title */}
         <div className="text-center">
-          <div className="cinzel-decorative text-egyptian-gold text-sm tracking-[0.4em] uppercase mb-2 opacity-80">
-            ✦ Ancient Egypt ✦
+          <div className="font-mono text-ember-gold/60 text-xs tracking-[0.5em] uppercase mb-3">
+            ✦ TACTICAL COMMAND ✦
           </div>
-          <h1 className="cinzel-decorative font-bold text-egyptian-gold leading-tight"
-            style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', textShadow: '0 0 40px oklch(0.75 0.18 75 / 0.6), 0 2px 4px rgba(0,0,0,0.8)' }}>
+          <h1
+            className="cinzel-decorative font-bold text-ember-gold leading-tight"
+            style={{
+              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+              textShadow: '0 0 40px oklch(0.75 0.18 75 / 0.5), 0 0 80px oklch(0.75 0.18 75 / 0.2), 0 2px 4px rgba(0,0,0,0.9)',
+            }}
+          >
             Pharaoh's
           </h1>
-          <h1 className="cinzel-decorative font-bold text-egyptian-gold leading-tight"
-            style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', textShadow: '0 0 40px oklch(0.75 0.18 75 / 0.6), 0 2px 4px rgba(0,0,0,0.8)' }}>
+          <h1
+            className="cinzel-decorative font-bold text-ember-gold leading-tight"
+            style={{
+              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+              textShadow: '0 0 40px oklch(0.75 0.18 75 / 0.5), 0 0 80px oklch(0.75 0.18 75 / 0.2), 0 2px 4px rgba(0,0,0,0.9)',
+            }}
+          >
             Conquest
           </h1>
-          <div className="mt-3 text-egyptian-sand/70 font-garamond text-lg tracking-widest">
+          <div className="mt-3 font-mono text-aged-bronze/70 text-sm tracking-[0.3em] uppercase">
             ─── Auto-Chess Strategy ───
           </div>
         </div>
 
-        {/* Decorative hieroglyph row */}
-        <div className="text-2xl opacity-40 tracking-[0.5em] text-egyptian-gold select-none">
+        {/* Hieroglyph row */}
+        <div className="text-xl opacity-25 tracking-[0.5em] text-ember-gold select-none">
           𓂀 𓃭 𓆣 𓇋 𓈖 𓉐 𓊃 𓋴
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-4 w-full max-w-xs">
+        <div className="flex flex-col gap-3 w-full max-w-xs">
           <button
             onClick={onStartGame}
-            className="egyptian-btn px-8 py-4 text-lg rounded-sm w-full"
+            className="egyptian-btn px-8 py-4 text-lg w-full tracking-widest"
+            style={{ clipPath: 'polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)' }}
           >
-            ⚔️ Start Game
+            ⚔ Start Game
           </button>
           <button
             onClick={() => setShowHowToPlay(true)}
-            className="egyptian-btn-secondary px-8 py-4 text-lg rounded-sm w-full"
+            className="tactical-btn px-8 py-4 text-base w-full tracking-widest"
+            style={{ clipPath: 'polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)' }}
           >
             📜 How to Play
           </button>
         </div>
 
         {/* Unit preview row */}
-        <div className="flex gap-3 mt-4 flex-wrap justify-center max-w-2xl">
+        <div className="flex gap-3 mt-2 flex-wrap justify-center max-w-2xl">
           {UNIT_DEFINITIONS.slice(0, 8).map(unit => (
-            <div key={unit.id} className="flex flex-col items-center gap-1 opacity-80 hover:opacity-100 transition-opacity">
-              <div className="w-12 h-12 rounded-sm overflow-hidden border border-egyptian-gold/40"
-                style={{ boxShadow: `0 0 8px ${unit.color}40` }}>
+            <div key={unit.id} className="flex flex-col items-center gap-1 opacity-70 hover:opacity-100 transition-opacity group">
+              <div
+                className="w-12 h-12 overflow-hidden border border-aged-bronze/40 group-hover:border-ember-gold/60 transition-colors"
+                style={{
+                  clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
+                  boxShadow: `0 0 8px ${unit.color}30`,
+                }}
+              >
                 <img
                   src={unit.portraitUrl}
                   alt={unit.name}
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               </div>
-              <span className="text-egyptian-sand/60 text-xs cinzel" style={{ fontSize: '0.6rem' }}>
+              <span className="font-mono text-egyptian-sand/50 group-hover:text-egyptian-sand/80 transition-colors" style={{ fontSize: '0.55rem' }}>
                 {unit.name.split(' ')[0]}
               </span>
             </div>
@@ -92,14 +122,14 @@ export default function MainMenu({ onStartGame }: MainMenuProps) {
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-4 left-0 right-0 text-center z-10">
-        <p className="text-egyptian-sand/40 text-xs font-garamond">
-          © {new Date().getFullYear()} Built with ❤️ using{' '}
+      <div className="absolute bottom-6 left-0 right-0 text-center z-10">
+        <p className="font-mono text-egyptian-sand/30 text-xs">
+          © {new Date().getFullYear()} Built with ❤ using{' '}
           <a
             href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname || 'pharaohs-conquest')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-egyptian-gold/60 hover:text-egyptian-gold transition-colors"
+            className="text-ember-gold/40 hover:text-ember-gold/70 transition-colors"
           >
             caffeine.ai
           </a>
@@ -108,21 +138,21 @@ export default function MainMenu({ onStartGame }: MainMenuProps) {
 
       {/* How to Play Modal */}
       <Dialog open={showHowToPlay} onOpenChange={setShowHowToPlay}>
-        <DialogContent className="max-w-2xl max-h-[80vh] egyptian-panel border-egyptian-gold/60 text-foreground">
+        <DialogContent className="max-w-2xl max-h-[80vh] border-aged-bronze/60 text-foreground"
+          style={{ background: 'oklch(0.10 0.02 55 / 0.98)', clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))' }}>
           <DialogHeader>
-            <DialogTitle className="cinzel text-egyptian-gold text-2xl text-center">
+            <DialogTitle className="cinzel text-ember-gold text-2xl text-center tracking-widest">
               📜 How to Play
             </DialogTitle>
           </DialogHeader>
-          <ScrollArea className="h-[60vh] pr-4 scrollbar-thin">
+          <ScrollArea className="h-[60vh] pr-4">
             <div className="space-y-6 font-garamond text-egyptian-sand/90">
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">⚔️ Game Overview</h3>
-                <p>Pharaoh's Conquest is an auto-chess strategy game. Build an army of Egyptian warriors, place them on the battlefield, and watch them fight automatically. Survive as many rounds as possible!</p>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">⚔ Game Overview</h3>
+                <p>Pharaoh's Conquest is an auto-chess strategy game. Build an army of Egyptian warriors, place them on the hexagonal battlefield, and watch them fight automatically. Survive as many rounds as possible!</p>
               </section>
-
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">🏪 The Shop</h3>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">🏪 The Shop</h3>
                 <ul className="space-y-1 list-disc list-inside">
                   <li>Each round you get 5 gold (plus bonuses)</li>
                   <li>Buy units from the shop to add them to your bench</li>
@@ -131,37 +161,34 @@ export default function MainMenu({ onStartGame }: MainMenuProps) {
                   <li>Buy XP for 4 gold to level up faster</li>
                 </ul>
               </section>
-
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">🗺️ The Board</h3>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">🗺 The Hex Board</h3>
                 <ul className="space-y-1 list-disc list-inside">
-                  <li>Drag units from your bench to the board</li>
+                  <li>Drag units from your bench to the hexagonal board</li>
                   <li>Your level determines how many units you can field</li>
-                  <li>Click a board unit then click a bench slot to swap</li>
-                  <li>Right-click or use the sell button to sell units</li>
+                  <li>Click a board unit then click a hex cell to move it</li>
+                  <li>Use the sell button (hover) to sell units</li>
                 </ul>
               </section>
-
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">✨ Synergies</h3>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">✦ Synergies</h3>
                 <p className="mb-2">Placing units with matching traits activates powerful synergy bonuses:</p>
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(SYNERGY_DEFINITIONS).map(([key, syn]) => (
-                    <div key={key} className="bg-egyptian-dark/50 rounded p-2 border border-egyptian-gold/20">
-                      <div className="cinzel text-egyptian-gold text-sm">{syn.icon} {syn.name}</div>
-                      <div className="text-xs text-egyptian-sand/70 mt-1">{syn.description}</div>
+                    <div key={key} className="bg-deep-sand-dark/50 p-2 border border-aged-bronze/20"
+                      style={{ clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))' }}>
+                      <div className="cinzel text-ember-gold text-sm">{syn.icon} {syn.name}</div>
+                      <div className="text-xs text-egyptian-sand/60 mt-1">{syn.description}</div>
                     </div>
                   ))}
                 </div>
               </section>
-
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">⭐ Star Levels</h3>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">⭐ Star Levels</h3>
                 <p>Collect 3 copies of the same unit to automatically upgrade it to 2-star, gaining +80% HP and stats. Three 2-star units combine into a powerful 3-star!</p>
               </section>
-
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">💰 Economy Tips</h3>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">💰 Economy Tips</h3>
                 <ul className="space-y-1 list-disc list-inside">
                   <li>Win streaks give bonus gold each round</li>
                   <li>Interest: earn +1 gold per 10 gold saved (max 5)</li>
@@ -169,9 +196,8 @@ export default function MainMenu({ onStartGame }: MainMenuProps) {
                   <li>Higher level = access to stronger units in shop</li>
                 </ul>
               </section>
-
               <section>
-                <h3 className="cinzel text-egyptian-gold text-lg mb-2">❤️ Health</h3>
+                <h3 className="cinzel text-ember-gold text-lg mb-2">❤ Health</h3>
                 <p>You start with 100 HP. Losing a round costs HP based on the round number. Reach 0 HP and the game ends. Win as many rounds as you can!</p>
               </section>
             </div>

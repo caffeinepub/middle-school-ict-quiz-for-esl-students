@@ -1,126 +1,150 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Egyptian Auto-Chess Game – Full Feature Polish & Bug Fixes",
+  "title": "Hexagonal Grid Battle Board with Iron Command Visual Overhaul",
   "requirements": [
     {
-      "id": "REQ-8",
-      "summary": "Fix App.tsx to render the full Pharaoh's Conquest game instead of the legacy quiz/ecosystem layout",
+      "id": "REQ-13",
+      "summary": "Replace square grid cells with hexagonal tiles using proper hex grid layout and adapt all unit rendering and interactions to work on the hex grid",
       "acceptanceCriteria": [
-        "App.tsx renders the Egyptian auto-chess game UI, not a quiz or ecosystem app",
-        "No quiz, header, or unrelated components appear in the rendered app",
-        "Main menu screen with 'Pharaoh's Conquest' title and Start Game button is the entry screen",
-        "Gameplay screen shows HUD, battle board, shop, synergy panel, and bench"
+        "All battle board grid cells are visually rendered as regular hexagons, not squares or rectangles.",
+        "Hexagons tessellate correctly with no overlapping or misaligned tiles.",
+        "Player and enemy board sections each display a 7×4 hex grid.",
+        "Drag-and-drop unit placement works correctly on the hex grid.",
+        "Units, HP bars, star indicators, and portraits are correctly centered within their hexagonal cells.",
+        "No regression in combat animations or battle phase logic."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/GridTile.tsx",
           "operation": "modify",
-          "description": "Replace the quiz app layout (Header, Quiz, Footer) with a game state router that renders MainMenu when not in game mode, and the full auto-chess gameplay screen (GameHUD, BattleBoard, Shop, SynergyPanel, Bench) when in game. Wire useGameState hook to manage game/menu transitions. Remove all imports and references to Header, Quiz, and Footer components."
+          "description": "Replace the square tile rendering with a hexagonal tile using CSS clip-path or SVG polygon. Implement proper hexagon dimensions and positioning to support tessellation. Update drag-and-drop drop zones to match the hexagonal shape. Preserve existing drag-over, occupied, and enemy/friendly visual states while adapting them to the hexagon shape. Add hieroglyph decoration positioning for the hex center."
+        },
+        {
+          "path": "frontend/src/components/BattleBoard.tsx",
+          "operation": "modify",
+          "description": "Replace the current 7×4 square grid layout with a proper hexagonal grid layout using offset or axial coordinates. Implement hex grid positioning calculations to place tiles with correct spacing for tessellation. Update the grid container styling to accommodate hex tile dimensions and spacing. Ensure drag-and-drop coordinate mapping works correctly for the hex grid. Preserve all existing battle phase logic, unit rendering, and status banner functionality."
+        },
+        {
+          "path": "frontend/src/components/UnitSprite.tsx",
+          "operation": "modify",
+          "description": "Adapt unit sprite positioning to center correctly within hexagonal tiles. Update HP bar, portrait, star indicators, and name label positioning to fit the hex shape. Ensure attacking, dying, and selection animations work correctly on the hex grid without clipping outside tile boundaries."
+        },
+        {
+          "path": "frontend/src/utils/hexGrid.ts",
+          "operation": "create",
+          "description": "Create utility functions for hexagonal grid mathematics including axial-to-pixel coordinate conversion, pixel-to-axial coordinate conversion for drag-and-drop, hex neighbor calculations, and hex dimensions constants. Support both pointy-top and flat-top orientations with configuration. Provide helper functions for generating 7×4 hex grid coordinates."
         }
       ]
     },
     {
-      "id": "REQ-9",
-      "summary": "Update the HTML page title to 'Pharaoh's Conquest' in English",
+      "id": "REQ-14",
+      "summary": "Overhaul the visual presentation with Iron Command aesthetic: dark tactical war-room look, sharp panel edges, grid coordinate labels, military unit markers, and redesigned HUD with segmented stat blocks",
       "acceptanceCriteria": [
-        "Browser tab title reads 'Pharaoh's Conquest'",
-        "No Chinese or unrelated text appears in the HTML title tag"
+        "The battle board uses a dark tactical map aesthetic with visible coordinate labels along its edges.",
+        "A dark vignette or border frame surrounds the battle board.",
+        "Unit tokens on the hex board visually resemble military unit markers with bold portrait icons.",
+        "The HUD displays HP, Gold, Round, Wins, Losses in sharp segmented bordered panels.",
+        "Shop cards use a compact, military-briefing card style with dark background and gold/bronze accents.",
+        "SynergyPanel, Bench, and all game panels use dark backgrounds with gold/bronze accent borders.",
+        "Stat numbers use a monospaced or condensed sans-serif font; headings retain the Egyptian serif (Cinzel).",
+        "Overall color palette is darker (deep desert night tones) with high-contrast accent highlights.",
+        "No accessibility regression — text remains legible against its background."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/components/BattleBoard.tsx",
           "operation": "modify",
-          "description": "Change the <title> tag content from the Chinese ecosystem simulation title to 'Pharaoh's Conquest'."
-        }
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "summary": "Implement the MainMenu screen component with Egyptian theming, Start Game button, How to Play button, and desert background",
-      "acceptanceCriteria": [
-        "MainMenu renders with 'Pharaoh's Conquest' heading in Cinzel/serif font",
-        "Start Game button transitions the app into gameplay mode",
-        "How to Play button opens the HowToPlayModal dialog",
-        "Desert background image is visible behind the menu"
-      ],
-      "file_operations": [
+          "description": "Add grid coordinate label system along board edges displaying column letters (A-G) and row numbers (1-4) for both player and enemy sections. Apply dark vignette border frame around the entire battle board. Update background styling to use the new dark tactical palette tokens. Ensure coordinate labels are positioned outside the hex grid and styled with monospaced font."
+        },
+        {
+          "path": "frontend/src/components/UnitSprite.tsx",
+          "operation": "modify",
+          "description": "Redesign unit tokens to resemble military unit markers with bold iconography. Add sharp bordered frame around unit portraits. Update styling to use high-contrast colors from the dark tactical palette. Ensure HP bars use ember-gold or aged-bronze colors. Apply military marker styling to the name label and star indicators."
+        },
+        {
+          "path": "frontend/src/components/GameHUD.tsx",
+          "operation": "modify",
+          "description": "Redesign the HUD to display HP, Gold, Round, Wins, Losses, and Level/XP in sharp segmented bordered panels resembling a tactical command interface. Use dark command-panel background with gold and bronze accent borders. Apply monospaced or condensed sans-serif font to all stat numbers while preserving Cinzel for labels. Add riveted corner details or tactical panel styling to each stat block."
+        },
+        {
+          "path": "frontend/src/components/Shop.tsx",
+          "operation": "modify",
+          "description": "Redesign shop cards to use a compact military-briefing card style with dark background and gold/bronze accent borders. Apply sharp panel edges and tactical styling to all shop controls (reroll, lock, buy-XP, start-battle buttons). Use monospaced font for gold costs and numbers. Preserve all existing shop functionality and unit card interactivity."
+        },
+        {
+          "path": "frontend/src/components/UnitCard.tsx",
+          "operation": "modify",
+          "description": "Update unit cards to use dark background with gold/bronze accent borders matching the military-briefing style. Apply sharp bordered panel edges. Use monospaced font for stats (HP, attack) and gold cost. Preserve portrait, tier stars, faction badges, and drag-and-drop functionality. Ensure tooltip remains legible with the new color scheme."
+        },
+        {
+          "path": "frontend/src/components/SynergyPanel.tsx",
+          "operation": "modify",
+          "description": "Redesign the synergy panel to use dark command-panel background with gold/bronze accent borders and sharp panel edges. Apply monospaced font to trait counts and threshold numbers. Use high-contrast colors for active vs inactive synergies. Preserve collapsible reference list functionality and ensure all text remains legible."
+        },
+        {
+          "path": "frontend/src/components/Bench.tsx",
+          "operation": "modify",
+          "description": "Update bench styling to use dark background with gold/bronze accent borders. Apply tactical panel styling with sharp edges. Ensure unit cards on the bench use the updated military-briefing card style. Use monospaced font for capacity counter (e.g., '5/9'). Preserve drag-and-drop and sell functionality."
+        },
+        {
+          "path": "frontend/src/components/EgyptianPanel.tsx",
+          "operation": "modify",
+          "description": "Enhance the EgyptianPanel component to support the new dark tactical aesthetic while preserving the Egyptian theme. Add support for dark command-panel background variant with aged-bronze and ember-gold accent borders. Implement sharp bordered panel edge styling with optional riveted corner details. Ensure gradient backgrounds work with the new dark palette tokens. Preserve existing corner decorations and hieroglyph accent functionality."
+        },
         {
           "path": "frontend/src/components/MainMenu.tsx",
-          "operation": "create",
-          "description": "Create a new MainMenu component that displays 'Pharaoh's Conquest' as a large Cinzel-font heading, two centered buttons (Start Game and How to Play), and uses the desert background image from frontend/public/assets/generated/egypt-menu-bg.dim_1920x1080.png as a full-screen background. Start Game button calls a callback to transition into game mode. How to Play button opens HowToPlayModal in a dialog state. Use EgyptianPanel for button containers and apply Egyptian color palette (egyptian-gold, egyptian-turquoise) from index.css."
-        }
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "summary": "Remove or replace all empty stub components that belong to prior unrelated apps",
-      "acceptanceCriteria": [
-        "No empty or stub component files remain that are imported by game screens",
-        "No plant, animal mesh, or ecosystem components exist in the codebase",
-        "Any ControlPanel or StatsPanel used by the game has actual Egyptian-themed content"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/ControlPanel.tsx",
-          "operation": "delete",
-          "description": "Delete the empty ControlPanel.tsx stub file as it is not used by the Egyptian auto-chess game and belongs to a prior unrelated app."
-        },
-        {
-          "path": "frontend/src/components/GameScene.tsx",
-          "operation": "delete",
-          "description": "Delete the empty GameScene.tsx stub file as it is not used by the Egyptian auto-chess game and belongs to a prior unrelated app."
-        },
-        {
-          "path": "frontend/src/components/StatsPanel.tsx",
-          "operation": "delete",
-          "description": "Delete the empty StatsPanel.tsx stub file as it is not used by the Egyptian auto-chess game and belongs to a prior unrelated app."
-        },
-        {
-          "path": "frontend/src/components/Terrain.tsx",
-          "operation": "delete",
-          "description": "Delete the empty Terrain.tsx stub file as it is not used by the Egyptian auto-chess game and belongs to a prior ecosystem simulation app."
-        },
-        {
-          "path": "frontend/src/components/PlantMesh.tsx",
-          "operation": "delete",
-          "description": "Delete the empty PlantMesh.tsx stub file as it belongs to a prior ecosystem simulation app and has no relevance to the Egyptian auto-chess game."
-        },
-        {
-          "path": "frontend/src/components/AnimalMesh.tsx",
-          "operation": "delete",
-          "description": "Delete the empty AnimalMesh.tsx stub file as it belongs to a prior ecosystem simulation app and has no relevance to the Egyptian auto-chess game."
-        },
-        {
-          "path": "frontend/src/components/Header.tsx",
-          "operation": "delete",
-          "description": "Delete the Header.tsx component as it belongs to the legacy quiz app layout and is no longer used in the Egyptian auto-chess game."
-        },
-        {
-          "path": "frontend/src/components/Footer.tsx",
-          "operation": "delete",
-          "description": "Delete the Footer.tsx component as it belongs to the legacy quiz app layout and is no longer used in the Egyptian auto-chess game."
-        },
-        {
-          "path": "frontend/src/components/Quiz.tsx",
-          "operation": "delete",
-          "description": "Delete the Quiz.tsx component as it belongs to the legacy ICT quiz app and is no longer part of the Egyptian auto-chess game."
-        }
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "summary": "Verify and fix unit portrait image paths so all unit cards display correct Egyptian portraits",
-      "acceptanceCriteria": [
-        "All 8 unit types display their portrait images without broken image icons",
-        "Portrait paths in units.ts resolve to real files under /assets/generated",
-        "Shop and bench unit cards both show correct portraits"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/data/units.ts",
           "operation": "modify",
-          "description": "Audit all portraitUrl fields in the unit definitions array and update them to use the correct workspace paths to generated assets. Ensure the following mappings are correct: Ra Priest → /assets/generated/unit-ra-priest.dim_256x256.png, Mummy Warrior → /assets/generated/unit-mummy-warrior.dim_256x256.png, Horus Archer → /assets/generated/unit-horus-archer.dim_256x256.png, Sphinx → /assets/generated/unit-sphinx.dim_256x256.png, Anubis Guard → /assets/generated/unit-anubis-guard.dim_256x256.png, Isis Sorceress → /assets/generated/unit-isis-sorceress.dim_256x256.png, Charioteer → /assets/generated/unit-charioteer.dim_256x256.png, Pharaoh → /assets/generated/unit-pharaoh.dim_256x256.png. Replace any placeholder or broken paths."
+          "description": "Update main menu styling to use the dark tactical palette while preserving the Egyptian theme. Apply dark background with high-contrast gold/bronze accents to buttons and title. Ensure unit portrait preview row uses the new military marker styling. Update how-to-play modal to use dark command-panel styling. Preserve all existing navigation functionality."
+        },
+        {
+          "path": "frontend/src/components/GameOverScreen.tsx",
+          "operation": "modify",
+          "description": "Redesign the game over screen to use dark tactical command panel styling with sharp bordered stat blocks for round count, wins, and losses. Apply monospaced font to stat numbers. Use high-contrast ember-gold or aged-bronze for victory/defeat messaging. Preserve all navigation button functionality."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Update global Tailwind CSS design tokens to introduce the new dark tactical palette with deep-sand-dark, aged-bronze, ember-gold, deep-lapis-dark, and command-panel background colors",
+      "acceptanceCriteria": [
+        "New CSS custom property tokens for the dark tactical palette are defined in index.css.",
+        "tailwind.config.js extends the theme with the new color tokens.",
+        "All updated components reference the new tokens rather than hard-coded hex values.",
+        "Existing Egyptian gold and turquoise tokens are preserved and supplemented, not removed."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add new CSS custom properties in the :root block for the dark tactical palette: --deep-sand-dark (very dark brownish-sand), --aged-bronze (dark metallic bronze), --ember-gold (bright warm gold accent), --deep-lapis-dark (very dark blue-purple), and --command-panel-bg (near-black with slight warm tint). Define complementary tokens for borders, shadows, and hover states. Add utility classes for monospaced stat font styling. Preserve all existing Egyptian gold, turquoise, lapis, and sand tokens."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend the theme colors object to include the new dark tactical palette tokens: deepSandDark, agedBronze, emberGold, deepLapisDark, and commandPanelBg, mapping them to the CSS custom properties defined in index.css. Add a monospace font family option for stat numbers (e.g., 'Roboto Mono' or system monospace stack). Preserve all existing Egyptian-themed color tokens, fonts, shadows, and animations."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Generate and integrate new dark tactical desert battle board background and command panel frame images into the game UI",
+      "acceptanceCriteria": [
+        "A new dark battle board background image is saved in frontend/public/assets/generated.",
+        "A new dark command panel border/frame image is saved in frontend/public/assets/generated.",
+        "The new battle board background is applied to the BattleBoard component.",
+        "The new panel frame is applied to EgyptianPanel and all major game panels."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BattleBoard.tsx",
+          "operation": "modify",
+          "description": "Apply the generated dark battle board background image (frontend/public/assets/generated/battle-board-dark-bg.dim_1920x1080.png) as the background for the battle board container. Use CSS background-image with appropriate sizing (cover) and positioning (center). Layer the background behind the hex grid tiles and coordinate labels. Ensure the dark tactical aesthetic enhances readability of grid elements."
+        },
+        {
+          "path": "frontend/src/components/EgyptianPanel.tsx",
+          "operation": "modify",
+          "description": "Apply the generated command panel frame image (frontend/public/assets/generated/command-panel-frame-dark.dim_960x640.png) as a border or background layer option for panels using the dark tactical variant. Implement as a border-image or layered background element with appropriate nine-slice or tiling. Ensure the frame integrates with the aged-bronze and ember-gold accent borders. Preserve existing gradient background functionality."
         }
       ]
     }

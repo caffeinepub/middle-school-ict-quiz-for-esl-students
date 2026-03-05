@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-audit-and-fix-the-app-tsx-root-component-so-it-renders-the-full-pharaoh-s-conquest-game-mainmenu-gamehud-battleboard-shop-synergypanel-bench-instead-of-the-legacy-quiz-ecosystem-layout-remove-all-references-to-header-quiz-footer-and-any-non-game-components-from-app-tsx",
-      "featureTitle": "Audit and fix the App.tsx root component so it renders the full Pharaoh's Conquest game (MainMenu → GameHUD + BattleBoard + Shop + SynergyPanel + Bench) instead of the legacy quiz/ecosystem layout. Remove all references to Header, Quiz, Footer, and any non-game components from App.tsx.",
+      "featureId": "feature-replace-the-current-square-grid-cells-in-battleboard-tsx-and-gridtile-tsx-with-regular-hexagons-pointy-top-or-flat-top-orientation-implement-a-proper-hex-grid-layout-for-the-7-4-player-and-7-4-enemy-sections-using-offset-or-axial-coordinates-hexagon-tiles-should-use-css-clip-path-or-svg-polygon-to-render-the-correct-six-sided-shape-unit-sprites-hp-bars-and-drag-and-drop-logic-must-be-adapted-to-work-on-the-hexagonal-grid-gaps-between-hex-tiles-should-use-standard-hex-grid-spacing-so-tiles-tessellate-correctly",
+      "featureTitle": "Replace the current square grid cells in BattleBoard.tsx and GridTile.tsx with regular hexagons (pointy-top or flat-top orientation). Implement a proper hex grid layout for the 7×4 (player) and 7×4 (enemy) sections using offset or axial coordinates. Hexagon tiles should use CSS clip-path or SVG polygon to render the correct six-sided shape. Unit sprites, HP bars, and drag-and-drop logic must be adapted to work on the hexagonal grid. Gaps between hex tiles should use standard hex grid spacing so tiles tessellate correctly.",
       "files": [
-        "frontend/src/App.tsx"
+        "frontend/src/components/BattleBoard.tsx",
+        "frontend/src/utils/hexGrid.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,15 +16,21 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-8"
+        "REQ-13"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-fix-the-html-entry-point-frontend-index-html-to-set-the-page-title-to-pharaoh-s-conquest-in-english-instead-of-the-current-chinese-ecosystem-simulation-title",
-      "featureTitle": "Fix the HTML entry point (frontend/index.html) to set the page title to 'Pharaoh's Conquest' in English instead of the current Chinese ecosystem simulation title.",
+      "featureId": "feature-overhaul-the-overall-visual-presentation-of-the-game-inspired-by-the-iron-command-real-time-strategy-aesthetic-a-gritty-high-contrast-war-room-look-with-sharp-panel-edges-tactical-overlay-styling-and-a-darker-base-palette-deep-desert-night-tones-dark-sand-aged-bronze-deep-lapis-ember-gold-contrasted-by-bright-unit-highlight-colors-the-battle-board-should-feel-like-a-tactical-command-map-add-a-subtle-grid-coordinate-label-system-column-letters-row-numbers-along-the-board-edges-a-dark-vignette-border-around-the-board-and-unit-tokens-that-look-like-military-unit-markers-with-bold-iconography-the-hud-should-be-redesigned-to-resemble-a-tactical-command-interface-with-segmented-stat-blocks-hp-gold-round-streak-displayed-in-sharp-bordered-panels-shop-cards-should-adopt-a-compact-military-briefing-card-style-all-panels-synergypanel-shop-bench-hud-should-use-dark-backgrounds-with-gold-and-bronze-accent-borders-typography-for-labels-and-stats-should-shift-to-a-monospaced-or-condensed-sans-serif-for-stat-numbers-while-headings-retain-the-egyptian-serif-font",
+      "featureTitle": "Overhaul the overall visual presentation of the game inspired by the Iron Command (钢铁命令) real-time strategy aesthetic: a gritty, high-contrast war-room look with sharp panel edges, tactical overlay styling, and a darker base palette (deep desert night tones — dark sand, aged bronze, deep lapis, ember gold) contrasted by bright unit highlight colors. The battle board should feel like a tactical command map: add a subtle grid coordinate label system (column letters, row numbers) along the board edges, a dark vignette border around the board, and unit tokens that look like military unit markers with bold iconography. The HUD should be redesigned to resemble a tactical command interface with segmented stat blocks (HP, Gold, Round, Streak) displayed in sharp bordered panels. Shop cards should adopt a compact military-briefing card style. All panels (SynergyPanel, Shop, Bench, HUD) should use dark backgrounds with gold and bronze accent borders. Typography for labels and stats should shift to a monospaced or condensed sans-serif for stat numbers while headings retain the Egyptian serif font.",
       "files": [
-        "frontend/index.html"
+        "frontend/src/components/BattleBoard.tsx",
+        "frontend/src/components/Bench.tsx",
+        "frontend/src/components/GameHUD.tsx",
+        "frontend/src/components/GameOverScreen.tsx",
+        "frontend/src/components/MainMenu.tsx",
+        "frontend/src/components/Shop.tsx",
+        "frontend/src/components/SynergyPanel.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,15 +40,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-9"
+        "REQ-14"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-or-complete-the-mainmenu-screen-component-if-not-already-present-as-a-standalone-file-that-shows-the-game-title-pharaoh-s-conquest-with-egyptian-styled-typography-a-start-game-button-and-a-how-to-play-button-that-opens-howtoplaymodal-the-background-should-use-the-desert-background-image-asset",
-      "featureTitle": "Implement or complete the MainMenu screen component (if not already present as a standalone file) that shows the game title 'Pharaoh's Conquest' with Egyptian-styled typography, a Start Game button, and a How to Play button that opens HowToPlayModal. The background should use the desert background image asset.",
+      "featureId": "feature-update-the-global-tailwind-css-design-tokens-in-frontend-src-index-css-and-frontend-tailwind-config-js-to-introduce-the-new-dark-tactical-palette-add-css-custom-properties-for-deep-sand-dark-aged-bronze-ember-gold-deep-lapis-dark-and-command-panel-background-colors-ensure-these-tokens-are-applied-consistently-across-all-game-components-updated-in-req-14",
+      "featureTitle": "Update the global Tailwind CSS design tokens in frontend/src/index.css and frontend/tailwind.config.js to introduce the new dark tactical palette: add CSS custom properties for deep-sand-dark, aged-bronze, ember-gold, deep-lapis-dark, and command-panel background colors. Ensure these tokens are applied consistently across all game components updated in REQ-14.",
       "files": [
-        "frontend/src/components/MainMenu.tsx"
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -51,17 +59,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-10"
+        "REQ-15"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-ensure-all-empty-stub-components-controlpanel-tsx-gamescene-tsx-statspanel-tsx-terrain-tsx-plantmesh-tsx-animalmesh-tsx-are-either-removed-from-the-project-or-replaced-with-meaningful-egyptian-auto-chess-implementations-if-they-are-referenced-by-the-game-ui-remove-any-component-files-that-belong-to-prior-unrelated-apps",
-      "featureTitle": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations if they are referenced by the game UI. Remove any component files that belong to prior unrelated apps.",
+      "featureId": "feature-generate-a-new-dark-tactical-desert-battle-board-background-image-to-replace-or-supplement-the-existing-desert-background-the-image-should-evoke-a-night-time-aerial-view-of-an-egyptian-battlefield-with-a-dark-sandy-terrain-subtle-moonlit-dune-contours-faint-hieroglyph-map-markings-and-a-tactical-grid-overlay-texture-use-dimensions-1920-1080px-also-generate-an-updated-dark-command-panel-frame-border-image-for-the-game-panels-with-aged-bronze-and-ember-gold-tones-riveted-corner-details-and-worn-parchment-texture-use-dimensions-960-640px",
+      "featureTitle": "Generate a new dark tactical desert battle board background image to replace or supplement the existing desert background. The image should evoke a night-time aerial view of an Egyptian battlefield with a dark sandy terrain, subtle moonlit dune contours, faint hieroglyph map markings, and a tactical grid overlay texture. Use dimensions 1920×1080px. Also generate an updated dark command panel frame/border image for the game panels, with aged bronze and ember-gold tones, riveted corner details, and worn parchment texture. Use dimensions 960×640px.",
       "files": [
-        "frontend/src/components/Footer.tsx",
-        "frontend/src/components/Header.tsx",
-        "frontend/src/components/Quiz.tsx"
+        "frontend/src/components/BattleBoard.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -71,25 +77,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-11"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-verify-that-unit-portrait-images-at-the-paths-defined-in-frontend-src-data-units-ts-are-correctly-mapped-to-the-generated-static-assets-in-frontend-public-assets-generated-update-any-broken-portrait-paths-so-every-unit-card-and-shop-card-displays-its-correct-egyptian-unit-portrait",
-      "featureTitle": "Verify that unit portrait images at the paths defined in frontend/src/data/units.ts are correctly mapped to the generated static assets in frontend/public/assets/generated. Update any broken portrait paths so every unit card and shop card displays its correct Egyptian unit portrait.",
-      "files": [
-        "frontend/src/data/units.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-12"
+        "REQ-16"
       ],
       "confidence": "high"
     }

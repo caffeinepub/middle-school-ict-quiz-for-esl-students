@@ -1,102 +1,111 @@
 {
   "kind": "build_request",
-  "title": "Egyptian Auto-Chess Game – Full Feature Polish & Bug Fixes",
+  "title": "Hexagonal Grid Battle Board with Iron Command Visual Overhaul",
   "projectName": "Pharaoh's Conquest",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-8",
-      "text": "Audit and fix the App.tsx root component so it renders the full Pharaoh's Conquest game (MainMenu → GameHUD + BattleBoard + Shop + SynergyPanel + Bench) instead of the legacy quiz/ecosystem layout. Remove all references to Header, Quiz, Footer, and any non-game components from App.tsx.",
+      "id": "REQ-13",
+      "text": "Replace the current square grid cells in BattleBoard.tsx and GridTile.tsx with regular hexagons (pointy-top or flat-top orientation). Implement a proper hex grid layout for the 7×4 (player) and 7×4 (enemy) sections using offset or axial coordinates. Hexagon tiles should use CSS clip-path or SVG polygon to render the correct six-sided shape. Unit sprites, HP bars, and drag-and-drop logic must be adapted to work on the hexagonal grid. Gaps between hex tiles should use standard hex grid spacing so tiles tessellate correctly.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
         ],
         "quotes": [
-          "制作一款自走棋游戏以埃及为主题"
+          "格子改为正六边形"
         ]
       },
       "acceptanceCriteria": [
-        "App.tsx renders the Egyptian auto-chess game UI, not a quiz or ecosystem app",
-        "No quiz, header, or unrelated components appear in the rendered app",
-        "Main menu screen with 'Pharaoh's Conquest' title and Start Game button is the entry screen",
-        "Gameplay screen shows HUD, battle board, shop, synergy panel, and bench"
+        "All battle board grid cells are visually rendered as regular hexagons, not squares or rectangles.",
+        "Hexagons tessellate correctly with no overlapping or misaligned tiles.",
+        "Player and enemy board sections each display a 7×4 hex grid.",
+        "Drag-and-drop unit placement works correctly on the hex grid.",
+        "Units, HP bars, star indicators, and portraits are correctly centered within their hexagonal cells.",
+        "No regression in combat animations or battle phase logic."
       ]
     },
     {
-      "id": "REQ-9",
-      "text": "Fix the HTML entry point (frontend/index.html) to set the page title to 'Pharaoh's Conquest' in English instead of the current Chinese ecosystem simulation title.",
+      "id": "REQ-14",
+      "text": "Overhaul the overall visual presentation of the game inspired by the Iron Command (钢铁命令) real-time strategy aesthetic: a gritty, high-contrast war-room look with sharp panel edges, tactical overlay styling, and a darker base palette (deep desert night tones — dark sand, aged bronze, deep lapis, ember gold) contrasted by bright unit highlight colors. The battle board should feel like a tactical command map: add a subtle grid coordinate label system (column letters, row numbers) along the board edges, a dark vignette border around the board, and unit tokens that look like military unit markers with bold iconography. The HUD should be redesigned to resemble a tactical command interface with segmented stat blocks (HP, Gold, Round, Streak) displayed in sharp bordered panels. Shop cards should adopt a compact military-briefing card style. All panels (SynergyPanel, Shop, Bench, HUD) should use dark backgrounds with gold and bronze accent borders. Typography for labels and stats should shift to a monospaced or condensed sans-serif for stat numbers while headings retain the Egyptian serif font.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
+        ],
+        "quotes": [
+          "主体可以参考钢铁命令对画面进行优化"
         ]
       },
       "acceptanceCriteria": [
-        "Browser tab title reads 'Pharaoh's Conquest'",
-        "No Chinese or unrelated text appears in the HTML title tag"
+        "The battle board uses a dark tactical map aesthetic with visible coordinate labels along its edges.",
+        "A dark vignette or border frame surrounds the battle board.",
+        "Unit tokens on the hex board visually resemble military unit markers with bold portrait icons.",
+        "The HUD displays HP, Gold, Round, Wins, Losses in sharp segmented bordered panels.",
+        "Shop cards use a compact, military-briefing card style with dark background and gold/bronze accents.",
+        "SynergyPanel, Bench, and all game panels use dark backgrounds with gold/bronze accent borders.",
+        "Stat numbers use a monospaced or condensed sans-serif font; headings retain the Egyptian serif (Cinzel).",
+        "Overall color palette is darker (deep desert night tones) with high-contrast accent highlights.",
+        "No accessibility regression — text remains legible against its background."
       ]
     },
     {
-      "id": "REQ-10",
-      "text": "Implement or complete the MainMenu screen component (if not already present as a standalone file) that shows the game title 'Pharaoh's Conquest' with Egyptian-styled typography, a Start Game button, and a How to Play button that opens HowToPlayModal. The background should use the desert background image asset.",
+      "id": "REQ-15",
+      "text": "Update the global Tailwind CSS design tokens in frontend/src/index.css and frontend/tailwind.config.js to introduce the new dark tactical palette: add CSS custom properties for deep-sand-dark, aged-bronze, ember-gold, deep-lapis-dark, and command-panel background colors. Ensure these tokens are applied consistently across all game components updated in REQ-14.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
+        ],
+        "quotes": [
+          "主体可以参考钢铁命令对画面进行优化"
         ]
       },
       "acceptanceCriteria": [
-        "MainMenu renders with 'Pharaoh's Conquest' heading in Cinzel/serif font",
-        "Start Game button transitions the app into gameplay mode",
-        "How to Play button opens the HowToPlayModal dialog",
-        "Desert background image is visible behind the menu"
+        "New CSS custom property tokens for the dark tactical palette are defined in index.css.",
+        "tailwind.config.js extends the theme with the new color tokens.",
+        "All updated components reference the new tokens rather than hard-coded hex values.",
+        "Existing Egyptian gold and turquoise tokens are preserved and supplemented, not removed."
       ]
     },
     {
-      "id": "REQ-11",
-      "text": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations if they are referenced by the game UI. Remove any component files that belong to prior unrelated apps.",
+      "id": "REQ-16",
+      "text": "Generate a new dark tactical desert battle board background image to replace or supplement the existing desert background. The image should evoke a night-time aerial view of an Egyptian battlefield with a dark sandy terrain, subtle moonlit dune contours, faint hieroglyph map markings, and a tactical grid overlay texture. Use dimensions 1920×1080px. Also generate an updated dark command panel frame/border image for the game panels, with aged bronze and ember-gold tones, riveted corner details, and worn parchment texture. Use dimensions 960×640px.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
+        ],
+        "quotes": [
+          "主体可以参考钢铁命令对画面进行优化"
         ]
       },
       "acceptanceCriteria": [
-        "No empty or stub component files remain that are imported by game screens",
-        "No plant, animal mesh, or ecosystem components exist in the codebase",
-        "Any ControlPanel or StatsPanel used by the game has actual Egyptian-themed content"
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "text": "Verify that unit portrait images at the paths defined in frontend/src/data/units.ts are correctly mapped to the generated static assets in frontend/public/assets/generated. Update any broken portrait paths so every unit card and shop card displays its correct Egyptian unit portrait.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All 8 unit types display their portrait images without broken image icons",
-        "Portrait paths in units.ts resolve to real files under /assets/generated",
-        "Shop and bench unit cards both show correct portraits"
+        "A new dark battle board background image is saved in frontend/public/assets/generated.",
+        "A new dark command panel border/frame image is saved in frontend/public/assets/generated.",
+        "The new battle board background is applied to the BattleBoard component.",
+        "The new panel frame is applied to EgyptianPanel and all major game panels."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "All game state must remain frontend-only; do not add backend persistence",
-    "Preserve existing game logic in useGameState.tsx, combatEngine.ts, synergyCalculator.ts, and goldEconomy.ts"
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Preserve all existing game logic in useGameState.tsx and combatEngine.ts — only visual/layout changes are in scope.",
+    "Egyptian serif font (Cinzel/Cinzel Decorative) must be retained for all heading-level text.",
+    "Drag-and-drop unit placement functionality must remain fully operational after the hex grid migration."
   ],
   "nonGoals": [
-    "Adding new unit types beyond the existing 8",
-    "Multiplayer or real-time features",
-    "Backend data persistence or user accounts",
-    "Changing the core auto-chess game rules or economy"
+    "Changing the underlying game rules, combat engine logic, or synergy calculations.",
+    "Adding new unit types or synergies.",
+    "Implementing 3D graphics or Three.js rendering.",
+    "Backend changes — the backend has no game state.",
+    "Changing the game title or branding."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Aerial night-view Egyptian battlefield with dark sandy terrain, moonlit dune contours, faint hieroglyph map markings, and a tactical grid overlay texture (battle-board-dark-bg.dim_1920x1080.png)",
+      "Aged bronze and ember-gold command panel border frame with riveted corner details and worn parchment center texture (command-panel-frame-dark.dim_960x640.png)"
+    ],
     "edits": []
   }
 }

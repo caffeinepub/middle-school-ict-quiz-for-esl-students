@@ -1,78 +1,79 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T02:00:14.707Z",
+  "generatedAt": "2026-02-27T03:00:35.109Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 5,
-    "implemented": 5,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Implement or complete the MainMenu screen component (if not already present as a standalone file) that shows the game title 'Pharaoh's Conquest' with Egyptian-styled typography, a Start Game button, and a How to Play button that opens HowToPlayModal. The background should use the desert background image asset.",
+        "id": "REQ-13",
+        "summary": "Replace the current square grid cells in BattleBoard.tsx and GridTile.tsx with regular hexagons (pointy-top or flat-top orientation). Implement a proper hex grid layout for the 7×4 (player) and 7×4 (enemy) sections using offset or axial coordinates. Hexagon tiles should use CSS clip-path or SVG polygon to render the correct six-sided shape. Unit sprites, HP bars, and drag-and-drop logic must be adapted to work on the hexagonal grid. Gaps between hex tiles should use standard hex grid spacing so tiles tessellate correctly.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/MainMenu.tsx"
+          "frontend/src/components/GridTile.tsx",
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/UnitSprite.tsx",
+          "frontend/src/utils/hexGrid.ts"
         ],
         "matchedFiles": [
-          "frontend/src/components/MainMenu.tsx"
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/utils/hexGrid.ts"
         ]
       },
       {
-        "id": "REQ-11",
-        "summary": "Ensure all empty stub components (ControlPanel.tsx, GameScene.tsx, StatsPanel.tsx, Terrain.tsx, PlantMesh.tsx, AnimalMesh.tsx) are either removed from the project or replaced with meaningful Egyptian auto-chess implementations if they are referenced by the game UI. Remove any component files that belong to prior unrelated apps.",
+        "id": "REQ-14",
+        "summary": "Overhaul the overall visual presentation of the game inspired by the Iron Command (钢铁命令) real-time strategy aesthetic: a gritty, high-contrast war-room look with sharp panel edges, tactical overlay styling, and a darker base palette (deep desert night tones — dark sand, aged bronze, deep lapis, ember gold) contrasted by bright unit highlight colors. The battle board should feel like a tactical command map: add a subtle grid coordinate label system (column letters, row numbers) along the board edges, a dark vignette border around the board, and unit tokens that look like military unit markers with bold iconography. The HUD should be redesigned to resemble a tactical command interface with segmented stat blocks (HP, Gold, Round, Streak) displayed in sharp bordered panels. Shop cards should adopt a compact military-briefing card style. All panels (SynergyPanel, Shop, Bench, HUD) should use dark backgrounds with gold and bronze accent borders. Typography for labels and stats should shift to a monospaced or condensed sans-serif for stat numbers while headings retain the Egyptian serif font.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/ControlPanel.tsx",
-          "frontend/src/components/GameScene.tsx",
-          "frontend/src/components/StatsPanel.tsx",
-          "frontend/src/components/Terrain.tsx",
-          "frontend/src/components/PlantMesh.tsx",
-          "frontend/src/components/AnimalMesh.tsx",
-          "frontend/src/components/Header.tsx",
-          "frontend/src/components/Footer.tsx",
-          "frontend/src/components/Quiz.tsx"
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/UnitSprite.tsx",
+          "frontend/src/components/GameHUD.tsx",
+          "frontend/src/components/Shop.tsx",
+          "frontend/src/components/UnitCard.tsx",
+          "frontend/src/components/SynergyPanel.tsx",
+          "frontend/src/components/Bench.tsx",
+          "frontend/src/components/EgyptianPanel.tsx",
+          "frontend/src/components/MainMenu.tsx",
+          "frontend/src/components/GameOverScreen.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Header.tsx",
-          "frontend/src/components/Footer.tsx",
-          "frontend/src/components/Quiz.tsx"
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/GameHUD.tsx",
+          "frontend/src/components/Shop.tsx",
+          "frontend/src/components/SynergyPanel.tsx",
+          "frontend/src/components/Bench.tsx",
+          "frontend/src/components/MainMenu.tsx",
+          "frontend/src/components/GameOverScreen.tsx"
         ]
       },
       {
-        "id": "REQ-12",
-        "summary": "Verify that unit portrait images at the paths defined in frontend/src/data/units.ts are correctly mapped to the generated static assets in frontend/public/assets/generated. Update any broken portrait paths so every unit card and shop card displays its correct Egyptian unit portrait.",
+        "id": "REQ-15",
+        "summary": "Update the global Tailwind CSS design tokens in frontend/src/index.css and frontend/tailwind.config.js to introduce the new dark tactical palette: add CSS custom properties for deep-sand-dark, aged-bronze, ember-gold, deep-lapis-dark, and command-panel background colors. Ensure these tokens are applied consistently across all game components updated in REQ-14.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/data/units.ts"
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
         ],
         "matchedFiles": [
-          "frontend/src/data/units.ts"
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
         ]
       },
       {
-        "id": "REQ-8",
-        "summary": "Audit and fix the App.tsx root component so it renders the full Pharaoh's Conquest game (MainMenu → GameHUD + BattleBoard + Shop + SynergyPanel + Bench) instead of the legacy quiz/ecosystem layout. Remove all references to Header, Quiz, Footer, and any non-game components from App.tsx.",
+        "id": "REQ-16",
+        "summary": "Generate a new dark tactical desert battle board background image to replace or supplement the existing desert background. The image should evoke a night-time aerial view of an Egyptian battlefield with a dark sandy terrain, subtle moonlit dune contours, faint hieroglyph map markings, and a tactical grid overlay texture. Use dimensions 1920×1080px. Also generate an updated dark command panel frame/border image for the game panels, with aged bronze and ember-gold tones, riveted corner details, and worn parchment texture. Use dimensions 960×640px.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/components/BattleBoard.tsx",
+          "frontend/src/components/EgyptianPanel.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-9",
-        "summary": "Fix the HTML entry point (frontend/index.html) to set the page title to 'Pharaoh's Conquest' in English instead of the current Chinese ecosystem simulation title.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
+          "frontend/src/components/BattleBoard.tsx"
         ]
       }
     ]
@@ -82,23 +83,17 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.html",
-    "frontend/src/App.tsx",
+    "frontend/public/assets/generated/battle-board-dark-bg.dim_1920x1080.png",
+    "frontend/public/assets/generated/command-panel-frame-dark.dim_960x640.png",
     "frontend/src/components/BattleBoard.tsx",
-    "frontend/src/components/BattleLog.tsx",
     "frontend/src/components/Bench.tsx",
-    "frontend/src/components/Footer.tsx",
     "frontend/src/components/GameHUD.tsx",
     "frontend/src/components/GameOverScreen.tsx",
-    "frontend/src/components/Header.tsx",
     "frontend/src/components/MainMenu.tsx",
-    "frontend/src/components/Quiz.tsx",
     "frontend/src/components/Shop.tsx",
     "frontend/src/components/SynergyPanel.tsx",
-    "frontend/src/components/UnitDetail.tsx",
-    "frontend/src/data/units.ts",
-    "frontend/src/hooks/useGameState.tsx",
     "frontend/src/index.css",
+    "frontend/src/utils/hexGrid.ts",
     "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",

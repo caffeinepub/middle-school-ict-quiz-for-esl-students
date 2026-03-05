@@ -1,86 +1,103 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
+  darkMode: ['class'],
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
-      fontFamily: {
-        cinzel: ["'Cinzel'", "serif"],
-        "cinzel-decorative": ["'Cinzel Decorative'", "serif"],
-        garamond: ["'EB Garamond'", "Georgia", "serif"],
-        sans: ["'EB Garamond'", "Georgia", "serif"],
-      },
       colors: {
-        "egyptian-gold": "oklch(0.75 0.18 75)",
-        "egyptian-gold-dark": "oklch(0.60 0.16 70)",
-        "egyptian-turquoise": "oklch(0.65 0.15 200)",
-        "egyptian-sand": "oklch(0.85 0.08 80)",
-        "egyptian-lapis": "oklch(0.35 0.14 260)",
-        "egyptian-crimson": "oklch(0.50 0.20 25)",
-        "egyptian-dark": "oklch(0.10 0.02 55)",
-        "egyptian-panel": "oklch(0.16 0.04 55)",
-        border: "oklch(var(--border))",
-        input: "oklch(var(--input))",
-        ring: "oklch(var(--ring))",
-        background: "oklch(var(--background))",
-        foreground: "oklch(var(--foreground))",
-        primary: {
-          DEFAULT: "oklch(var(--primary))",
-          foreground: "oklch(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "oklch(var(--secondary))",
-          foreground: "oklch(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "oklch(var(--destructive))",
-          foreground: "oklch(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "oklch(var(--muted))",
-          foreground: "oklch(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "oklch(var(--accent))",
-          foreground: "oklch(var(--accent-foreground))",
+        background: 'oklch(var(--background) / <alpha-value>)',
+        foreground: 'oklch(var(--foreground) / <alpha-value>)',
+        card: {
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
         },
         popover: {
-          DEFAULT: "oklch(var(--popover))",
-          foreground: "oklch(var(--popover-foreground))",
+          DEFAULT: 'var(--popover)',
+          foreground: 'var(--popover-foreground)',
         },
-        card: {
-          DEFAULT: "oklch(var(--card))",
-          foreground: "oklch(var(--card-foreground))",
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
         },
+        secondary: {
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)',
+        },
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
+        },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
+
+        // Egyptian legacy tokens
+        'egyptian-gold': 'var(--egyptian-gold)',
+        'egyptian-gold-dark': 'var(--egyptian-gold-dark)',
+        'egyptian-turquoise': 'var(--egyptian-turquoise)',
+        'egyptian-sand': 'var(--egyptian-sand)',
+        'egyptian-lapis': 'var(--egyptian-lapis)',
+        'egyptian-crimson': 'var(--egyptian-crimson)',
+        'egyptian-dark': 'var(--egyptian-dark)',
+        'egyptian-panel': 'var(--egyptian-panel)',
+        'egyptian-border': 'var(--egyptian-border)',
+
+        // Dark Tactical / Iron Command tokens
+        'deep-sand-dark': 'var(--deep-sand-dark)',
+        'aged-bronze': 'var(--aged-bronze)',
+        'ember-gold': 'var(--ember-gold)',
+        'deep-lapis-dark': 'var(--deep-lapis-dark)',
+        'command-panel': 'var(--command-panel-bg)',
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      fontFamily: {
+        cinzel: ['Cinzel', 'serif'],
+        'cinzel-decorative': ['Cinzel Decorative', 'serif'],
+        garamond: ['EB Garamond', 'Georgia', 'serif'],
+        mono: ['"Roboto Mono"', '"Courier New"', 'monospace'],
       },
       boxShadow: {
-        gold: "0 0 20px oklch(0.75 0.18 75 / 0.4)",
-        "gold-lg": "0 0 40px oklch(0.75 0.18 75 / 0.5)",
-        turquoise: "0 0 20px oklch(0.65 0.15 200 / 0.4)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
+        'egyptian-glow': '0 0 20px oklch(0.75 0.18 75 / 0.4)',
+        'ember-glow': '0 0 20px oklch(0.78 0.18 78 / 0.4)',
+        'bronze-glow': '0 0 12px oklch(0.48 0.10 65 / 0.4)',
+        'turquoise-glow': '0 0 16px oklch(0.62 0.14 200 / 0.4)',
+        'crimson-glow': '0 0 16px oklch(0.50 0.20 25 / 0.4)',
+        'command-panel': 'inset 0 0 40px oklch(0.05 0.02 55 / 0.6), 0 4px 20px oklch(0.05 0.02 55 / 0.8)',
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+        'battle-flash': 'battle-flash 0.5s ease-in-out infinite',
+        'float': 'float 3s ease-in-out infinite',
+      },
+      keyframes: {
+        'glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 8px oklch(0.78 0.18 78 / 0.4)' },
+          '50%': { boxShadow: '0 0 20px oklch(0.78 0.18 78 / 0.8), 0 0 40px oklch(0.78 0.18 78 / 0.3)' },
+        },
+        'battle-flash': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.6' },
+        },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-6px)' },
+        },
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/container-queries'),
+  ],
 };
